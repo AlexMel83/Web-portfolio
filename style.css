@@ -665,6 +665,9 @@ h1.service__h1{
       grid-template-columns: 1fr;
       height: auto;
   }
+  .iot{
+     height: 500px;
+  }
 }
 @media (min-width: 768px){
   .portfolio__row{

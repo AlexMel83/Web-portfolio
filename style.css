@@ -513,7 +513,8 @@ h1.service__h1{
     background-color: #C0C0C0;
     padding: 10px;
     border-radius: 5px;
-    margin: 10px;
+    width: 80%;
+    margin: 0 auto;
 }
 .form__input{
     border-radius: 3px;
@@ -679,9 +680,10 @@ h1.service__h1{
       display: grid;
       gap: 10px;
       padding: 10px;
-      margin: 0 100px;
+      margin: 0 auto;
       border-radius: 5px;
       grid-template: 40px 100px 40px 40px/ minmax(auto, 550px) minmax(auto, 550px);
+      max-width: 1140px;
   }
   .skill h1{
       padding-top: 80px;

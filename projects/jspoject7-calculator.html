@@ -1,0 +1,129 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title> JS-Calculator </title>
+<link href="../style.css" rel="stylesheet">
+<style type="text/css">
+	.content{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.calculator{
+		position: relative;
+		top: 30px;
+		background: rgb(69,69,69);
+		padding: 10px;
+		border-radius: 5px;
+	}
+	.calculator form input{
+		border: 0;
+		outline: 0;
+		width: 70px;
+		height: 70px;
+		border-radius: 5px;
+		box-shadow: -8px -8px 15px rgba(255,255,255,0.1),5px 5px 15px rgba(0,0,0,0.2);
+		background: gray;
+		font-size: 30px;
+		color: #fff;
+		cursor: pointer;
+		margin: 5px;
+	}
+	form input.operator{
+		background: gold;
+		color: #000;
+		font-weight: 700;
+	}
+	form .display{
+		display: flex;
+		justify-content: flex-end;
+		margin: 20px 0;
+	}
+	form .display input{
+		text-align: right;
+		flex: 1;
+		box-size: 45px;
+		box-shadow: none;
+		font-size: 50px;
+		background: transparent;
+		border: 2px solid white;
+		padding: 10px;
+	}
+	form input.equal{
+		width: 155px;
+	}
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="header">
+	<div class="conteiner">
+		<div class="header__body">
+			<a href="http://cfhope.in.ua" class="header__logo" target="blank">
+				<img src="../img/logo-transparent.png" alt="logo" class="header__logo_img">
+			</a>
+			<div class="header__burger">
+						<span></span>
+			</div>
+			<nav class="header__menu menu">
+				<ul data-line-effect="" class="header__list">
+					<li><a href="../index.html" class="header__link">home</a></li>
+					<li><a href="../portfolio.html" class="header__link">portfolio</a>
+					<li><a href="../about.html" class="header__link">about</a></li>
+					<li><a href="../skills.html" class="header__link">skills</a></li>
+					<li><a href="../contacts.html" class="header__link">contacts</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>	
+	<div id="content" class="content">
+		<div class="container">
+			<div class="calculator">
+				<form action="">
+					<div class="display">
+						<input type="text" name="display">
+					</div>
+					<div>
+						<input type="button" value="AC" onclick="display.value = '' " class="operator">
+						<input type="button" value="DE" onclick="display.value = display.value.toString().slice(0,-1)" class="operator">
+						<input type="button" value="." onclick="display.value += '.' " class="operator">
+						<input type="button" value="/" onclick="display.value += '/' " class="operator">
+					</div>
+					<div>
+						<input type="button" value="7" onclick="display.value += '7' ">
+						<input type="button" value="8" onclick="display.value += '8' ">
+						<input type="button" value="9" onclick="display.value += '9' ">
+						<input type="button" value="*" onclick="display.value += '*' " class="operator">
+					</div>
+					<div>
+						<input type="button" value="4" onclick="display.value += '4' ">
+						<input type="button" value="5" onclick="display.value += '5' ">
+						<input type="button" value="6" onclick="display.value += '6' ">
+						<input type="button" value="-" onclick="display.value += '-' " class="operator">
+					</div>
+					<div>
+						<input type="button" value="1" onclick="display.value += '1' ">
+						<input type="button" value="2" onclick="display.value += '2' ">
+						<input type="button" value="3" onclick="display.value += '3' ">
+						<input type="button" value="+" onclick="display.value += '+' " class="operator">
+					</div>
+					<div>
+						<input type="button" value="00" onclick="display.value += '00' ">
+						<input type="button" value="0" onclick="display.value += '0' ">
+						<input type="button" value="=" class="equal operator" onclick="display.value = eval(display.value)">
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+	</div>
+<footer class="footer">
+	<div class="footer__copy">Test page make by html. Alexander Meleshko &copy; 2023</div>
+	<div class="footer__text">hosting provided by <a href="https://wphost.me/" target="blank"> "WPHost.me" </a>
+   	<img src="https://wphost.me/catalog/images/2021/03/logo.svg"  title="wphost" class="footer__host">
+  	</div>
+</footer>
+</body>
+</html>

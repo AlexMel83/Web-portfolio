@@ -1,0 +1,104 @@
+ <!DOCTYPE html>
+<html>
+<head>
+<title> JS-Calculator </title>
+<link href="../style.css" rel="stylesheet">
+<style type="text/css">
+	.content{
+		max-width: 500px;
+		margin: 100px auto;
+		height: 80%;
+	}
+	#input{
+		width: 300px;
+		margin: 5px 0;
+		font-size: 20px;
+	}
+	.btn{
+		display: flex;
+		justify-content: space-between;
+		background-color: rgba(0,0,0,0.3);
+	}
+	button{
+		height: 30px;
+		width: 100px;
+		margin-bottom: 5px;
+	}
+	li{
+		position: relative;
+		left: 20px;
+		background-color: rgba(0,0,0,0.3);
+		font-size: 20px;
+	}
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<header class="header">
+	<div class="conteiner">
+		<div class="header__body">
+			<a href="http://cfhope.in.ua" class="header__logo" target="blank">
+				<img src="../img/logo-transparent.png" alt="logo" class="header__logo_img">
+			</a>
+			<div class="header__burger">
+						<span></span>
+			</div>
+			<nav class="header__menu menu">
+				<ul data-line-effect="" class="header__list">
+					<li><a href="../index.html" class="header__link">home</a></li>
+					<li><a href="../portfolio.html" class="header__link">portfolio</a>
+					<li><a href="../about.html" class="header__link">about</a></li>
+					<li><a href="../skills.html" class="header__link">skills</a></li>
+					<li><a href="../contacts.html" class="header__link">contacts</a></li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>	
+	<div id="content" class="content">
+		<input type="text" id="input"><br>
+		<div class="btn">
+		<button id="add">add task</button>
+		<button id="del">delete last task</button>
+		</div>
+		<ol id="list">
+		</ol>
+
+
+	</div>
+<footer class="footer">
+	<div class="footer__copy">Test page make by html. Alexander Meleshko &copy; 2023</div>
+	<div class="footer__text">hosting provided by <a href="https://wphost.me/" target="blank"> "WPHost.me" </a>
+   	<img src="https://wphost.me/catalog/images/2021/03/logo.svg"  title="wphost" class="footer__host">
+  	</div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script>
+	let input = document.querySelector('#input');
+	let addTask = document.querySelector('#add');
+	let delTask = document.querySelector('#del');
+	let list = document.querySelector('#list');
+	addTask.addEventListener('click',function(){
+		if(input.value === '') return;
+		add();
+		input.value = '';
+	});
+	let count = 0;
+	let li =[];
+	function add(){
+		li.push(document.createElement('li'));
+		list.appendChild(li[count]);
+		li[count].textContent = input.value;
+		count++;
+
+	}
+	delTask.addEventListener('click',function(){
+			count--;
+			list.removeChild(li[count]);
+			li.pop();
+	});
+
+</script>
+</body>
+</html>

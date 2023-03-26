@@ -1,7 +1,7 @@
  <!DOCTYPE html>
 <html>
 <head>
-<title> JS-Calculator </title>
+<title> JS Stack TaskList</title>
 <link href="../style.css" rel="stylesheet">
 <style type="text/css">
 	.content{
@@ -30,7 +30,9 @@
 		background-color: rgba(0,0,0,0.3);
 		font-size: 20px;
 	}
-
+	ul>li{
+		list-style-type: none;
+	}
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -64,8 +66,6 @@
 		</div>
 		<ol id="list">
 		</ol>
-
-
 	</div>
 <footer class="footer">
 	<div class="footer__copy">Test page make by html. Alexander Meleshko &copy; 2023</div>
@@ -98,7 +98,6 @@
 			list.removeChild(li[count]);
 			li.pop();
 	});
-
 </script>
 </body>
 </html>

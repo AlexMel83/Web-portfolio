@@ -92,6 +92,7 @@ h3.home{
 }
 .header__list li{
     margin-left: 20px;
+    list-style-type: none;
 }
 .header__list li:last-child{
     margin-right: 50px;

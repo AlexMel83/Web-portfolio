@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title> Editable table </title>
+	<link href="../style.css" rel="stylesheet">
+	<style type="text/css">
+		table {
+			text-align: center;
+			font-weight: 700;
+			font-size: 30px;
+			margin: 10px;
+			color: #454545;
+			background-color: silver;
+			margin: 10px auto;
+			min-width: 145px;
+			margin-top: 70px;
+		}
+
+		.btn {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			gap: 5px;
+		}
+
+		.btn button {
+			height: 30px;
+			width: 70px;
+		}
+
+		input {
+			border: 1px solid #454545;
+			background-color: #fff;
+		}
+
+		td {
+			padding: 10px;
+		}
+
+		td {
+			border: solid 1px black;
+		}
+	</style>
+	<link href="style.css" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+	<header class="header">
+		<div class="conteiner">
+			<div class="header__body">
+				<a href="http://cfhope.in.ua" class="header__logo" target="blank">
+					<img src="../img/logo-transparent.png" alt="logo" class="header__logo_img">
+				</a>
+				<div class="header__burger">
+					<span></span>
+				</div>
+				<nav class="header__menu menu">
+					<ul data-line-effect="" class="header__list">
+						<li><a href="../index.html" class="header__link">home</a></li>
+						<li><a href="../portfolio.html" class="header__link">portfolio</a>
+						<li><a href="../about.html" class="header__link">about</a></li>
+						<li><a href="../skills.html" class="header__link">skills</a></li>
+						<li><a href="../contacts.html" class="header__link">contacts</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+	</header>
+	<div id="content" class="content">
+		<table id="table">
+			<thead>
+				<tr>
+					<th data-type="integer">ID</th>
+					<th data-type="date">Data</th>
+					<th data-type="text">Name</th>
+					<th data-type="double">Summ</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>4</td>
+					<td>05.10.2004</td>
+					<td>Josef Biden</td>
+					<td>15750.50</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>10.10.2010</td>
+					<td>Bill Clinton</td>
+					<td>10750.20</td>
+				</tr>
+				<tr>
+					<td>6</td>
+					<td>21.05.2018</td>
+					<td>Barac Obama</td>
+					<td>23570.25</td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td>12.12.2008</td>
+					<td>George Bush</td>
+					<td>20000.00</td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td>04.12.2001</td>
+					<td>Donald Trump</td>
+					<td>1980.00</td>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>29.07.2014</td>
+					<td>George Washington</td>
+					<td>15050.50</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+	<script>
+		let table = document.getElementById('table');
+		let trs = table.getElementsByTagName('tr');
+		let tds = table.getElementsByTagName('td');
+
+		for (let i of tds) {
+			i.addEventListener('click', function func() {
+				let input = document.createElement('input');
+				input.value = i.innerText;
+				i.innerHTML = '';
+				i.appendChild(input);
+				input.addEventListener('blur', () => {
+					let text = input.value;
+					i.innerHTML = text;
+					i.addEventListener('click', func)
+				});
+				i.removeEventListener('click', func);
+			});
+		};
+
+		let colIndex = -1;
+
+		function sortTable(index, type, isSorted) {
+			const tbody = table.querySelector('tbody');
+			function compare(rowA, rowB) {
+				const rowDataA = rowA.cells[index].innerHTML;
+				const rowDataB = rowB.cells[index].innerHTML;
+
+				switch (type) {
+					case 'integer':
+					case 'double':
+						return rowDataA - rowDataB;
+						break;
+					case 'date':
+						const dateA = rowDataA.split('.').reverse().join('-');
+						const dateB = rowDataB.split('.').reverse().join('-');
+						return new Date(dateA).getTime() - new Date(dateB).getTime();
+						break;
+					case 'text':
+						if (rowDataA < rowDataB) return -1;
+						else if (rowDataA > rowDataB) return 1;
+						else return 0;
+						break;
+				}
+			}
+			let rows = [].slice.call(tbody.rows);
+			rows.sort(compare);
+			if (isSorted) rows.reverse();
+			table.removeChild(tbody);
+			for (let i = 0; i < rows.length; i++) {
+				tbody.appendChild(rows[i]);
+			}
+			table.appendChild(tbody);
+		};
+
+		table.addEventListener('click', e => {
+			const el = e.target;
+			if (el.nodeName !== 'TH') return;
+			const index = el.cellIndex;
+			const type = el.getAttribute('data-type');
+			sortTable(index, type, colIndex === index);
+			colIndex = (colIndex === index) ? -1 : index;
+		});
+
+	</script>
+	<footer class="footer">
+		<div class="footer__copy">Test page make by html. Alexander Meleshko &copy; 2023</div>
+		<div class="footer__text">hosting provided by <a href="https://wphost.me/" target="blank"> "WPHost.me" </a>
+			<img src="https://wphost.me/catalog/images/2021/03/logo.svg" title="wphost" class="footer__host">
+		</div>
+	</footer>
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+	<script src="../script.js"></script>
+</body>
+
+</html>

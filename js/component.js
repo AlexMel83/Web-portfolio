@@ -89,7 +89,7 @@ function drawFooter(currentPage) {
                     <li class="ms-3"><a class="link-body-emphasis" href="https://www.facebook.com/alexandr.meleshko.9" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
                     <li class="ms-3"><a class="link-body-emphasis" href="https://twitter.com/AleksandrMel83" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>
                     <li class="ms-3"><a class="link-body-emphasis" href="https://www.instagram.com/sasha_iraq/" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#instagram"></use></svg></a></li>
-                    <li class="ms-3"><a class="link-body-emphasis" https://github.com/AlexMel83" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#github"></use></svg></a></li>
+                    <li class="ms-3"><a class="link-body-emphasis" href="https://github.com/AlexMel83" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#github"></use></svg></a></li>
                     <li class="ms-3"><a class="link-body-emphasis" href="https://www.linkedin.com/in/alexmel83" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#linkedin"></use></svg></a></li>
                 </ul>
             </div>
@@ -100,15 +100,7 @@ function drawFooter(currentPage) {
 if (currentPage == 'Make table' || currentPage == 'JS-Calculator' || currentPage == 'Editable table' ||
     currentPage == 'Editable sort table' || currentPage == 'Script for open popup windows' ||
     currentPage == 'JS Stack TaskList' || currentPage == 'JS ToDoList' || currentPage == 'JavaScript Tic-Tac-Toe') deep = 1;
-if (currentPage == 'Maket' || currentPage == 'Second individual project') deep = 2;
+if (currentPage == 'Maket' || currentPage == 'Second individual project' || currentPage == 'JS Game Snake') deep = 2;
 
 drawHeader(currentPage, deep);
 drawFooter(currentPage);
-
-
-
-/* 
-<div class="header__burger">
-                    <span></span>
-                </div> 
-*/

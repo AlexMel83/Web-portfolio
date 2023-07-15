@@ -129,9 +129,9 @@ function drawHeader(currentPage, deep) {
         case 2: logo = '<img src="../../img/logo-transparent.png" alt="logo" class="header-logo">'
     }
 
-    header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary menu">
+    header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary menu"> 
     <div class="container-fluid header-menu">
-        <a href="index.html" title="logo">
+    <a href="index.html" title="logo">
             ${logo}
         </a>
         <div class="mob-lang-select" >

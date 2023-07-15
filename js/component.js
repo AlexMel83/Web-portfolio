@@ -229,6 +229,7 @@ if (currentPage == 'Maket' || currentPage == 'Second individual project' || curr
 
 drawHeader(currentPage, deep);
 drawFooter(currentPage);
+drawModal();
 
 let unlock = true;
 let menuClose = true;
@@ -255,49 +256,57 @@ $(".dropdown-menu>li>a, .nav-item>a").on("click", function () {
 
 
 function drawModal() {
+    let popupTitle, popupText, footerLabelName, footerLabelLastName, footerLabelEmail, footerLabelPhone,
+        footerBtnSubmit, footerOffert;
     if (langEn) {
-        (popupTitle = "Sign up for a lesson"),
-            (popupText =
-                "Fill out the form and we will definitely contact you to clarify the details"),
-            (popup2Close = "Close");
+        popupTitle = "Write to us", popupText = "And we will definitely contact you!", footerLabelName = "First name",
+            footerLabelLastName = "Last name", footerLabelEmail = "Email", footerLabelPhone = "Phone", footerBtnSubmit = "Send"
+        footerOffert = `By submitting an application, you automatically 
+        <a href="politic-of-confidenc-en.html" target="_blank" class="popup-ofert-a">agree to the public offer and consent to 
+        the processing of personal data.</a>`;
+    } else {
+        popupTitle = "Залишіть нам свої контакти", popupText = "І ми обов'язково зв'яжемось з Вами!",
+            footerLabelName = "Ім'я", footerLabelLastName = "Прізвище", footerLabelEmail = "Електронна пошта",
+            footerLabelPhone = "Телефон", footerBtnSubmit = "Відправити", footerOffert = `Надсилаючи заявку, 
+            Ви автоматично погоджуєтесь з публічною офертою та надаєте <a href="politic-of-confidenc.html" target="_blank" 
+            class="popup-ofert-a">згоду на обробку персональних даних.</a>`
     }
-
     document.body.innerHTML += `<div class="popup" id="popup">
             <div class="popup-body">
                 <div class="popup-content">
                     <a href="#marker" class="popup-close close-popup" title="popup-close"></a>
-                    <h3 class="popup-title">popupTitle</h3>
-                    <div class="popup-text">popupText</div>
+                    <h3 class="popup-title">${popupTitle}</h3>
+                    <div class="popup-text">${popupText}</div>
                     <form class="popup-form" action="https://intita.com/api/v1/entrant" method="post" accept-charset="utf-8"
                         id="popup-registration-form">
                         <div class="form-firstName">
-                            <label for="firstName">footerLabelName *</label>
+                            <label for="firstName">${footerLabelName} *</label>
                             <br><input maxlength="15" required type="text" name="firstName" class="firstName" id="firstName"
-                                placeholder="footerLabelName">
+                                placeholder="${footerLabelName}">
                             <div class="msg-error"></div>
                         </div>
                         <div class="form-lastName">
-                            <label for="lastName">{footerLabelLastName}</label>
+                            <label for="lastName">${footerLabelLastName}</label>
                             <br><input maxlength="30" type="text" name="lastName" class="lastName" id="lastName"
-                                placeholder="{footerLabelLastName}">
+                                placeholder="${footerLabelLastName}">
                             <div class="msg-error"></div>
                         </div>
                         <div class="form-email">
-                            <label for="email">{footerLabelEmail} *</label>
+                            <label for="email">${footerLabelEmail} *</label>
                             <br><input maxlength="25" required type="email" name="email" class="email" id="email"
                                 placeholder="email@gmail.com" autocomplete="on">
                             <div class="msg-error"></div>
                         </div>
                         <div class="form-phone">
-                            <label for="phone">{footerLabelPhone} *</label>
+                            <label for="phone">${footerLabelPhone} *</label>
                             <br><input required type="text" name="phone" class="phone" id="phone"
                                 placeholder="+38 (___) ___-__-__" autocomplete="on">
                             <div class="msg-error"></div>
                         </div>
                         <button type="submit" class="popup-btn submit-button" disabled="disabled">${footerBtnSubmit}</button>
-                        <input type="text" name="organization_id" value="103" class="inputhide">
+                        <input type="hide" name="organization_id" value="103" class="inputhide">
                     </form>
-                    <div class="popup-ofert caption">{footerOffert}</div>
+                    <div class="popup-ofert caption">${footerOffert}</div>
                 </div>
             </div>
         </div>
@@ -310,7 +319,7 @@ function drawModal() {
                     <button type="button" class="btn-close popup-success-btn" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                     <div class="popup-success-text" id="popup-success-text"></div>
-                    <button type="button" class="popup-btn popup-success-btn" data-bs-dismiss="modal">${popup2Close}</button>
+                    <button type="button" class="popup-btn popup-success-btn" data-bs-dismiss="modal">{popup2Close}</button>
                 </div>
             </div>
         </div>`;
@@ -336,6 +345,127 @@ if (scrollUp) {
         });
     });
 }
+
+//variables popup windovs
+const popupLinks = document.querySelectorAll(".popup-link");
+const body = document.querySelector("body");
+const lockPadding = document.querySelectorAll(".lock-padding");
+const popupCloseIcon = document.querySelectorAll(".close-popup");
+const forms = document.querySelectorAll(".popup-form");
+//"submit" button in registration form
+const buttonSubmit = document.querySelectorAll(".submit-button");
+let buttonSubmitPressed = false;
+//function popup windows
+/* modal window script */
+/* this script remove # from page with open popup */
+if (popupLinks.length > 0) {
+    for (let i = 0; i < popupLinks.length; i++) {
+        const popupLink = popupLinks[i];
+        popupLink.addEventListener("click", function (e) {
+            const popupName = popupLink.getAttribute("href").replace("#", "");
+            const curentPopup = document.getElementById(popupName);
+            popupOpen(curentPopup);
+            e.preventDefault();
+        });
+    }
+}
+
+/* this script closed closest element whish has .popup classe */
+if (popupCloseIcon.length > 0) {
+    for (let i = 0; i < popupCloseIcon.length; i++) {
+        const el = popupCloseIcon[i];
+        el.addEventListener("click", function (e) {
+            popupClose(el.closest(".popup"));
+            e.preventDefault();
+        });
+    }
+}
+
+function popupOpen(curentPopup) {
+    if (curentPopup && unlock) {
+        curentPopup.style.display = "unset"; //allows animation
+        const popupActive = document.querySelector(".popup.open");
+        if (popupActive) {
+            popupClose(popupActive, false);
+        } else {
+            bodyLock();
+        }
+        curentPopup.classList.add("open");
+        curentPopup.addEventListener("click", function (e) {
+            if (!e.target.closest(".popup-content")) {
+                popupClose(e.target.closest(".popup"));
+            }
+        });
+    }
+}
+
+function popupClose(popupActive, doUnlock = true) {
+    if (unlock) {
+        popupActive.classList.remove("open");
+        if (doUnlock) {
+            bodyUnLock();
+        }
+    }
+}
+
+/* function for lock body and forbid scrol page*/
+function bodyLock() {
+    const lockPaddingValue = window.innerWidth - body.offsetWidth + "px";
+
+    if (lockPadding.length > 0) {
+        for (let i = 0; i < lockPadding.length; i++) {
+            const el = lockPadding[i];
+            el.style.paddingRight = lockPaddingValue;
+        }
+    }
+
+    body.classList.add("lock");
+    body.style.paddingRight = lockPaddingValue;
+    if (menuClose) {
+        unlock = false;
+        setTimeout(function () {
+            unlock = true;
+        }, timeout);
+    }
+}
+
+function bodyUnLock() {
+    setTimeout(function () {
+        for (let i = 0; i < lockPadding.length; i++) {
+            const el = lockPadding[i];
+            el.style.paddingRight = "0px";
+        }
+        if (menuClose) {
+            body.classList.remove("lock");
+            body.style.paddingRight = "0px";
+        }
+    }, timeout);
+    if (!menuClose) {
+        unlock = false;
+        setTimeout(() => (unlock = true), timeout);
+    }
+}
+
+document.addEventListener("keydown", function (e) {
+    if (e.which === 27 && !buttonSubmitPressed) {
+        const popupActive = document.querySelector(".popup.open");
+        popupClose(popupActive);
+    }
+});
+
+/*script for sinhronized closing of two modal windows using buttons*/
+const closePopupSuccess = document.querySelectorAll(".popup-success-btn");
+
+closePopupSuccess.forEach((btn) => {
+    btn.addEventListener("click", function (e) {
+        const popupActive = document.querySelector(".popup.open");
+        popupClose(popupActive);
+
+        /*to allow "Esc" button after all pop-up windows are closed*/
+        buttonSubmitPressed = false;
+    });
+});
+
 
 
 

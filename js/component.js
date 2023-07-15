@@ -216,6 +216,10 @@ function drawFooter(currentPage) {
             </div>
         </div>
     </div>`;
+
+    document.body.innerHTML += `<svg class="scroll-up">
+                                    <use xlink:href="img/sprite.svg#scroll-up"></use>
+                                </svg>`
 }
 
 if (currentPage == 'Make table' || currentPage == 'JS-Calculator' || currentPage == 'Editable table' ||

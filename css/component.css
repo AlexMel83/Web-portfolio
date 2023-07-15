@@ -350,7 +350,33 @@ label {
     scale: 1.2;
 }
 
+.scroll-up {
+    position: fixed;
+    color: var(--bg-color);
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    right: 40px;
+    bottom: 50px;
+    z-index: 100;
+    visibility: hidden;
+    opacity: 0;
+    transition: .2s;
+    transform: translateY(100px);
+    cursor: pointer
+}
 
+.scroll-up:hover {
+    background: var(--color-green);
+    border-radius: 8px;
+    scale: 1.2;
+}
+
+.scroll-up-active {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0)
+}
 
 @media (max-width: 990px) {
     body.lock {

@@ -185,8 +185,7 @@ function drawFooter(currentPage) {
     } else {
         footerInc = "Розробник Олександр Мелешко. Всі права захищено."
     }
-    footer.innerHTML = `
-    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    footer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="facebook" viewBox="0 0 16 16" fill='currentColor'>
             <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
         </symbol>
@@ -249,3 +248,90 @@ $(".dropdown-menu>li>a, .nav-item>a").on("click", function () {
     $(".container-fluid").removeClass("active");
     $(".header-burger, .header-menu, .header-logo, .mob-lang-select").removeClass("active");
 });
+
+
+function drawModal() {
+    if (langEn) {
+        (popupTitle = "Sign up for a lesson"),
+            (popupText =
+                "Fill out the form and we will definitely contact you to clarify the details"),
+            (popup2Close = "Close");
+    }
+
+    document.body.innerHTML += `<div class="popup" id="popup">
+            <div class="popup-body">
+                <div class="popup-content">
+                    <a href="#marker" class="popup-close close-popup" title="popup-close"></a>
+                    <h3 class="popup-title">popupTitle</h3>
+                    <div class="popup-text">popupText</div>
+                    <form class="popup-form" action="https://intita.com/api/v1/entrant" method="post" accept-charset="utf-8"
+                        id="popup-registration-form">
+                        <div class="form-firstName">
+                            <label for="firstName">footerLabelName *</label>
+                            <br><input maxlength="15" required type="text" name="firstName" class="firstName" id="firstName"
+                                placeholder="footerLabelName">
+                            <div class="msg-error"></div>
+                        </div>
+                        <div class="form-lastName">
+                            <label for="lastName">{footerLabelLastName}</label>
+                            <br><input maxlength="30" type="text" name="lastName" class="lastName" id="lastName"
+                                placeholder="{footerLabelLastName}">
+                            <div class="msg-error"></div>
+                        </div>
+                        <div class="form-email">
+                            <label for="email">{footerLabelEmail} *</label>
+                            <br><input maxlength="25" required type="email" name="email" class="email" id="email"
+                                placeholder="email@gmail.com" autocomplete="on">
+                            <div class="msg-error"></div>
+                        </div>
+                        <div class="form-phone">
+                            <label for="phone">{footerLabelPhone} *</label>
+                            <br><input required type="text" name="phone" class="phone" id="phone"
+                                placeholder="+38 (___) ___-__-__" autocomplete="on">
+                            <div class="msg-error"></div>
+                        </div>
+                        <button type="submit" class="popup-btn submit-button" disabled="disabled">${footerBtnSubmit}</button>
+                        <input type="text" name="organization_id" value="103" class="inputhide">
+                    </form>
+                    <div class="popup-ofert caption">{footerOffert}</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="modal fade" id="modal-success-window" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="popup-success-content">
+                    <h3 class="popup-success-title" id="popup-success-title"></h3>
+                    <button type="button" class="btn-close popup-success-btn" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                    <div class="popup-success-text" id="popup-success-text"></div>
+                    <button type="button" class="popup-btn popup-success-btn" data-bs-dismiss="modal">${popup2Close}</button>
+                </div>
+            </div>
+        </div>`;
+}
+
+//variables ScrolUp btn
+const offset = 100;
+const scrollUp = document.querySelector(".scroll-up");
+const getTop = () => window.pageYOffset || document.documentElement.scrollTop;
+/* Code scrolUp btn */
+if (scrollUp) {
+    window.addEventListener("scroll", () => {
+        if (getTop() > offset) {
+            scrollUp.classList.add("scroll-up-active");
+        } else {
+            scrollUp.classList.remove("scroll-up-active");
+        }
+    });
+    scrollUp.addEventListener("click", () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    });
+}
+
+
+

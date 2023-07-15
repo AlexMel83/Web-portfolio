@@ -466,6 +466,208 @@ closePopupSuccess.forEach((btn) => {
     });
 });
 
+//variables validation forms
+let firstName = document.querySelectorAll(".firstName");
+let lastName = document.querySelectorAll(".lastName");
+let email = document.querySelectorAll(".email");
+let phone = document.querySelectorAll(".phone");
+let firstNameCorrect = false,
+    emailCorrect = false,
+    phoneCorrect = false;
+let validationPassed = false;
+let incorrectMsg = "";
+if (langEn) {
+    incorrectMsg = "The field is filled in incorrectly";
+} else {
+    incorrectMsg = "Поле заповнене некоректно";
+}
+
+//function validation forms
+$(document).ready(function () {
+    // INPUTMASK +38 (___) ___-__-__
+    jQuery(".phone").inputmask({
+        mask: "+38 (999) 999-99-99",
+        greedy: false,
+    });
+
+});
+
+function validationSuccess() {
+    for (let i = 0; i < buttonSubmit.length; i++) {
+        if (firstNameCorrect && emailCorrect && phoneCorrect) {
+            validationPassed = true;
+            buttonSubmit[i].removeAttribute("disabled");
+        } else {
+            buttonSubmit[i].setAttribute("disabled", "disabled");
+            validationPassed = false;
+        }
+    }
+}
+// '’-
+if (firstName.length) {
+    for (let i = 0; i < firstName.length; i++) {
+        let regex = /[^A-ZА-ЯЁІЇЄa-zа-яіїёє'’-]/;
+        let element = firstName[i];
+        element.oninput = function () {
+            element.value = element.value.replace(regex, "");
+            if (element.value.length < 2) {
+                firstNameCorrect = false;
+            } else {
+                firstNameCorrect = true;
+            }
+            validationSuccess();
+        };
+        element.onblur = function () {
+            if (element.value.length < 2) {
+                this.classList.remove("input-correct");
+                this.classList.add("input-error");
+                this.previousElementSibling.previousElementSibling.classList.remove(
+                    "input-correct"
+                );
+                this.previousElementSibling.previousElementSibling.classList.add(
+                    "input-error"
+                );
+                this.nextElementSibling.textContent = incorrectMsg;
+                firstNameCorrect = false;
+            } else {
+                this.classList.remove("input-error");
+                this.classList.add("input-correct");
+                this.previousElementSibling.previousElementSibling.classList.remove(
+                    "input-error"
+                );
+                this.previousElementSibling.previousElementSibling.classList.add(
+                    "input-correct"
+                );
+                this.nextElementSibling.textContent = "";
+                firstNameCorrect = true;
+            }
+            validationSuccess();
+        };
+        element.onchange = function () {
+            if (element.value.length < 2) {
+                firstNameCorrect = false;
+            } else {
+                firstNameCorrect = true;
+            }
+            validationSuccess();
+        };
+    }
+}
+
+if (lastName.length) {
+    for (let i = 0; i < lastName.length; i++) {
+        let regex = /[^A-ZА-ЯЁІЇЄa-zа-яіїёє'’-]/;
+        let element = lastName[i];
+        element.oninput = function () {
+            element.value = element.value.replace(regex, "");
+        };
+    }
+}
+
+if (email.length) {
+    for (let i = 0; i < email.length; i++) {
+        let regex =
+            /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/;
+        let regexcyr = /[а-яА-ЯіІїЇёЁ]/g;
+        let element = email[i];
+        element.oninput = function () {
+            this.value = this.value.replace(regexcyr, "");
+            if (this.value.match(regex)) {
+                emailCorrect = true;
+            } else {
+                emailCorrect = false;
+            }
+            validationSuccess();
+        };
+        element.onblur = function () {
+            if (this.value.match(regex)) {
+                this.classList.remove("input-error");
+                this.classList.add("input-correct");
+                this.previousElementSibling.previousElementSibling.classList.remove(
+                    "input-error"
+                );
+                this.previousElementSibling.previousElementSibling.classList.add(
+                    "input-correct"
+                );
+                this.nextElementSibling.textContent = "";
+                emailCorrect = true;
+            } else {
+                this.classList.remove("input-correct");
+                this.classList.add("input-error");
+                this.previousElementSibling.previousElementSibling.classList.remove(
+                    "input-correct"
+                );
+                this.previousElementSibling.previousElementSibling.classList.add(
+                    "input-error"
+                );
+                this.nextElementSibling.textContent = incorrectMsg;
+                emailCorrect = false;
+            }
+            validationSuccess();
+        };
+        element.onchange = function () {
+            if (this.value.match(regex)) {
+                emailCorrect = true;
+            } else {
+                emailCorrect = false;
+            }
+            validationSuccess();
+        };
+    }
+}
+
+if (phone.length) {
+    for (let i = 0; i < phone.length; i++) {
+        let element = phone[i];
+        element.onblur = function () {
+            if (element.value.length < 19 || element.value[18] === "_") {
+                this.classList.remove("input-correct");
+                this.classList.add("input-error");
+                this.previousElementSibling.previousElementSibling.classList.remove(
+                    "input-correct"
+                );
+                this.previousElementSibling.previousElementSibling.classList.add(
+                    "input-error"
+                );
+                this.nextElementSibling.textContent = incorrectMsg;
+                phoneCorrect = false;
+            } else {
+                this.classList.remove("input-error");
+                this.classList.add("input-correct");
+                this.previousElementSibling.previousElementSibling.classList.remove(
+                    "input-error"
+                );
+                this.previousElementSibling.previousElementSibling.classList.add(
+                    "input-correct"
+                );
+                this.nextElementSibling.textContent = "";
+                phoneCorrect = true;
+            }
+            validationSuccess();
+        };
+        element.onchange = function () {
+            if (element.value.length < 19 || element.value[18] === "_") {
+                phoneCorrect = false;
+            } else {
+                phoneCorrect = true;
+            }
+            validationSuccess();
+        };
+        element.oninput = function () {
+            if (element.value.length < 19 || element.value[18] === "_") {
+                phoneCorrect = false;
+            } else {
+                phoneCorrect = true;
+            }
+            // INPUTMASK +38 (___) ___-__-__
+            $(".phone").inputmask({
+                mask: "+38 (999) 999-99-99",
+                greedy: false,
+            });
+            validationSuccess();
+        };
+    }
+}
 
 
 

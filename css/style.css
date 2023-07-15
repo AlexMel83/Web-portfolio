@@ -154,9 +154,8 @@ h3.home {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 8px;
-    margin-top: 80px;
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .portfolio__subtitle {

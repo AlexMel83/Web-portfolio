@@ -257,19 +257,19 @@ $(".dropdown-menu>li>a, .nav-item>a").on("click", function () {
 
 function drawModal() {
     let popupTitle, popupText, footerLabelName, footerLabelLastName, footerLabelEmail, footerLabelPhone,
-        footerBtnSubmit, footerOffert;
+        footerBtnSubmit, footerOffert, popup2Close;
     if (langEn) {
-        popupTitle = "Write to us", popupText = "And we will definitely contact you!", footerLabelName = "First name",
+        popupTitle = "Write to us", popupText = "Fill out the form and we will definitely contact you to clarify the details.", footerLabelName = "First name",
             footerLabelLastName = "Last name", footerLabelEmail = "Email", footerLabelPhone = "Phone", footerBtnSubmit = "Send"
         footerOffert = `By submitting an application, you automatically 
         <a href="politic-of-confidenc-en.html" target="_blank" class="popup-ofert-a">agree to the public offer and consent to 
-        the processing of personal data.</a>`;
+        the processing of personal data.</a>`, popup2Close = "Close";
     } else {
-        popupTitle = "Залишіть нам свої контакти", popupText = "І ми обов'язково зв'яжемось з Вами!",
+        popupTitle = "Залишіть нам свої контакти", popupText = "Заповніть форму і ми обов'язково зв'яжемося з вами для уточнення деталей.",
             footerLabelName = "Ім'я", footerLabelLastName = "Прізвище", footerLabelEmail = "Електронна пошта",
             footerLabelPhone = "Телефон", footerBtnSubmit = "Відправити", footerOffert = `Надсилаючи заявку, 
             Ви автоматично погоджуєтесь з публічною офертою та надаєте <a href="politic-of-confidenc.html" target="_blank" 
-            class="popup-ofert-a">згоду на обробку персональних даних.</a>`
+            class="popup-ofert-a">згоду на обробку персональних даних.</a>`, popup2Close = "Закрити"
     }
     document.body.innerHTML += `<div class="popup" id="popup">
             <div class="popup-body">
@@ -277,7 +277,7 @@ function drawModal() {
                     <a href="#marker" class="popup-close close-popup" title="popup-close"></a>
                     <h3 class="popup-title">${popupTitle}</h3>
                     <div class="popup-text">${popupText}</div>
-                    <form class="popup-form" action="https://intita.com/api/v1/entrant" method="post" accept-charset="utf-8"
+                    <form class="popup-form" action="#" method="post" accept-charset="utf-8"
                         id="popup-registration-form">
                         <div class="form-firstName">
                             <label for="firstName">${footerLabelName} *</label>
@@ -319,7 +319,7 @@ function drawModal() {
                     <button type="button" class="btn-close popup-success-btn" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                     <div class="popup-success-text" id="popup-success-text"></div>
-                    <button type="button" class="popup-btn popup-success-btn" data-bs-dismiss="modal">{popup2Close}</button>
+                    <button type="button" class="popup-btn popup-success-btn" data-bs-dismiss="modal">${popup2Close}</button>
                 </div>
             </div>
         </div>`;

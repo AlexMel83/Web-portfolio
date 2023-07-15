@@ -436,12 +436,12 @@ label {
 
 .popup-close {
     display: block;
-    position: relative;
+    position: absolute;
     width: 25px;
     height: 25px;
     z-index: 5;
-    top: 13px;
-    left: 530px
+    top: 40px;
+    right: 40px;
 }
 
 .popup-close:after,
@@ -679,12 +679,12 @@ input:focus {
 
     ul.navbar-nav {
         padding-top: 42px;
-        padding-left: 54px;
         width: 220px;
     }
 
     ul.navbar-nav>li {
         margin-bottom: 22px;
+        text-align: center;
     }
 
     .dropdown-toggle::after {
@@ -843,5 +843,16 @@ input:focus {
 
     .footer__text {
         text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    nav .container-fluid {
+        padding: 0;
+    }
+
+    .popup-content {
+        width: 100vw;
+        padding: 40px 20px;
     }
 }

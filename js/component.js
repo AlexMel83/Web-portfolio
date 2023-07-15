@@ -64,7 +64,6 @@ function drawHeader(currentPage, deep) {
         headerBtn = "Send message", langSelect = "EN", langSelectMobUa = "", langSelectMobEn = `class="lang-select"`;
     }
 
-
     function drawMenu() {
         let navMenu = "";
         if (langEn) {
@@ -110,7 +109,7 @@ function drawHeader(currentPage, deep) {
 
                 } break;
                 case 2: {
-                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link"../../>href="index.html">Home</a></li>`;
+                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../index.html">Home</a></li>`;
                     if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio.html">My portfolio</a></li>`;
                     if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about.html">About me</a></li>`;
                     if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills.html">My skills</a></li>`;

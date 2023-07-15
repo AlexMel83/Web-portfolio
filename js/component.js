@@ -4,14 +4,14 @@ let currentPage = document.title;
 let deep = 0;
 
 function drawHeader(currentPage, deep) {
-    function drawMenu(currentPage) {
+    function drawMenu() {
         let navMenu = "";
         if (deep == 0) {
-            if (currentPage != 'Home page') navMenu += `<li><a href="index.html" class="header__link">home</a></li>`;
-            if (currentPage != 'My portfolio') navMenu += `<li><a href="portfolio.html" class="header__link">portfolio</a></li>`;
-            if (currentPage != 'About me') navMenu += `<li><a href="about.html" class="header__link">about</a></li>`;
-            if (currentPage != 'My skills') navMenu += `<li><a href="skills.html" class="header__link">skills</a></li>`;
-            if (currentPage != 'My contacts') navMenu += `<li><a href="contacts.html" class="header__link">contacts</a></li>`;
+            if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index.html">Home</a></li>`;
+            if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">My portfolio</a></li>`;
+            if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about.html">About me</a></li>`;
+            if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills.html">My skills</a></li>`;
+            if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts.html">My contacts</a></li>`;
         }
         if (deep == 1) {
             if (currentPage != 'Home page') navMenu += `<li><a href="../index.html" class="header__link">home</a></li>`;
@@ -55,11 +55,7 @@ function drawHeader(currentPage, deep) {
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu-list">
                 <div></div>
-                <li class="nav-item"><a class="nav-link menu-link" href="index.html">Home</a></li>
-                <li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">My portfolio</a></li>
-                <li class="nav-item"><a class="nav-link menu-link" href="about.html">About me</a></li>
-                <li class="nav-item"><a class="nav-link menu-link" href="skills.html">My skills</a></li>
-                <li class="nav-item"><a class="nav-link menu-link" href="contacts.html">My contacts</a></li>
+                ${drawMenu()}
                 <li class="nav-item dropdown" id="navlang">
                     <span class="nav-link dropdown-toggle menu-link" role="button" data-bs-toggle="dropdown"
                         aria-expanded="false">

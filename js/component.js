@@ -39,27 +39,58 @@ function drawHeader(currentPage, deep) {
         case 2: logo = '<img src="../../img/logo-transparent.png" alt="logo" class="header__logo_img">'
     }
 
-    header.innerHTML = `<div class="container-fluid">
-            <div class="container">
-                <div class="header__body">
-                    <nav class="header__menu menu navbar navbar-expand-lg ">
-                        <a class="navbar-brand header__logo" href="/">
-                            ${logo}
-                        </a>
-                        <button class="header-burger navbar-toggler" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                            <span></span>
-                        </button>
-                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                            <ul data-line-effect="" class="navbar-nav me-auto mb-2 mb-lg-0 header__list">
-                                ${drawMenu(currentPage)}                
-                            </ul>
-                        </div
-                    </nav>
-                </div>
+    header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary menu">
+    <div class="container-fluid header-menu">
+        <a href="index.html" title="logo">
+            <div class="header-logo"></div>
+        </a>
+        <div class="mob-lang-select">
+            <a class="lang-select" href="#">UA</a>
+            <div class="vertical"></div>
+            <a href="#">EN</a>
+        </div>
+        <div class="header-burger navbar-toggler" type="button" data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+            aria-expanded="false" aria-label="Toggle navigation"><span></span></div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 menu-list">
+                <div></div>
+                <li class="nav-item"><a class="nav-link menu-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">My portfolio</a></li>
+                <li class="nav-item"><a class="nav-link menu-link" href="about.html">About me</a></li>
+                <li class="nav-item"><a class="nav-link menu-link" href="skills.html">My skills</a></li>
+                <li class="nav-item"><a class="nav-link menu-link" href="contacts.html">My contacts</a></li>
+                <li class="nav-item dropdown" id="navlang">
+                    <span class="nav-link dropdown-toggle menu-link" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        UA</span>
+                    <ul class="dropdown-menu lang">
+                        <li><a class="dropdown-item lang" href="#">UA</a></li>
+                        <li><a class="dropdown-item lang" href="#">EN</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <div class="flash-btn">
+                <div class="menu-flash"></div>
+                <button class="header-btn popup-link" href="#popup">Send message</button>
             </div>
-        </div>`
+            <div class="header-icon-social">
+                <a href="https://www.facebook.com/alexandr.meleshko.9" class="social-link icon" title="facebook"
+                    target="_blank">
+                    <svg svg="" class="icon">
+                        <use xlink:href="img/sprite.svg#facebook"></use>
+                    </svg>
+                </a>
+                <a href="https://www.instagram.com/sasha_iraq/" class="social-link icon" title="instagram"
+                    target="_blank">
+                    <svg class="icon">
+                        <use xlink:href="img/sprite.svg#instagram"></use>
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
+</nav>`
 }
 
 function drawFooter(currentPage) {
@@ -104,3 +135,26 @@ if (currentPage == 'Maket' || currentPage == 'Second individual project' || curr
 
 drawHeader(currentPage, deep);
 drawFooter(currentPage);
+
+let unlock = true;
+let menuClose = true;
+const timeout = 800;
+/* this code added toggleClass to btn for work burger-menu and block scrolling*/
+$(".header-burger").click(function () {
+    $(".header-burger, .header-menu, .header-logo, .mob-lang-select").toggleClass("active");
+});
+
+$("#navbarSupportedContent").on("hidden.bs.collapse", function () {
+    $("body").removeClass("no_scrolling");
+});
+$("#navbarSupportedContent").on("show.bs.collapse", function () {
+    $("body").addClass("no_scrolling");
+});
+$(".navbar-nav>li>a").on("click", function () {
+    $(".navbar-collapse").collapse("hide");
+});
+$(".dropdown-menu>li>a, .nav-item>a").on("click", function () {
+    $(".navbar-collapse").collapse("hide");
+    $(".container-fluid").removeClass("active");
+    $(".header-burger, .header-menu, .header-logo, .mob-lang-select").removeClass("active");
+});

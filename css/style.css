@@ -52,6 +52,7 @@ h3.home {
     transition: all 0.8s ease 0s;
     position: relative;
     overflow: hidden;
+    line-height: 22px;
 }
 
 .home__buttoncv:hover {
@@ -66,7 +67,8 @@ h3.home {
 
 .btn__text {
     text-transform: uppercase;
-    letter-spacing: 4px;
+    letter-spacing: 2px;
+    text-align: center;
     position: relative;
     z-index: 1;
 }

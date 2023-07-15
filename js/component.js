@@ -1,53 +1,144 @@
 let header = document.querySelector('header');
 let footer = document.querySelector('footer');
+let href = document.location.pathname;
 let currentPage = document.title;
 let deep = 0;
+let html = href.includes('.html'), langEn = href.includes('-en'), isIndex = href.includes('index'),
+    lengthPath = href.length, haveHashtag = href.includes('#');
+
+function hrefLangUA() {
+    let hrefUa = document.location.pathname
+    if (langEn) {
+        if (html) {
+            let placeHtml = hrefUa.indexOf('-en.html');
+            hrefUa = hrefUa.slice(0, placeHtml);
+            hrefUa = hrefUa.concat('.html');
+        } else {
+            let placeHtml = hrefUa.indexOf('-en');
+            hrefUa = hrefUa.slice(0, placeHtml);
+            hrefUa = hrefUa.concat('.html');
+        }
+    }
+    return hrefUa;
+}
+
+function hrefLangEN() {
+    let hrefEn = document.location.pathname;
+    if (!langEn) {
+        if (haveHashtag) {
+            if (html) {
+                let placeHtml = hrefEn.indexOf('.html');
+                hrefEn = hrefEn.slice(0, placeHtml);
+                hrefEn = hrefEn.concat('-en.html');
+            } else {
+                if (lengthPath == 1) {
+                    let placeHtml = hrefEn.indexOf('#');
+                    hrefEn = hrefEn.slice(0, placeHtml);
+                    hrefEn = hrefEn.concat('index-en.html');
+                } else {
+                    let placeHtml = hrefEn.indexOf('#');
+                    hrefEn = hrefEn.slice(0, placeHtml);
+                    hrefEn = hrefEn.concat('-en.html');
+                }
+            }
+        } else {
+            if (html) {
+                let placeHtml = hrefEn.indexOf('.html');
+                hrefEn = hrefEn.slice(0, placeHtml);
+                hrefEn = hrefEn.concat('-en.html');
+            } else {
+                if (lengthPath == 1) {
+                    hrefEn = hrefEn.concat('index-en.html');
+                } else {
+                    hrefEn = hrefEn.concat('-en.html');
+                }
+            }
+        }
+    }
+    return hrefEn;
+}
 
 function drawHeader(currentPage, deep) {
+    let headerBtn = "надіслати повідомлення", langSelect = "UA", langSelectMobUa = `class="lang-select"`, langSelectMobEn = "";
+    if (langEn) {
+        headerBtn = "Send message", langSelect = "EN", langSelectMobUa = "", langSelectMobEn = `class="lang-select"`;
+    }
+
+
     function drawMenu() {
         let navMenu = "";
-        if (deep == 0) {
-            if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index.html">Home</a></li>`;
-            if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">My portfolio</a></li>`;
-            if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about.html">About me</a></li>`;
-            if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills.html">My skills</a></li>`;
-            if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts.html">My contacts</a></li>`;
-        }
-        if (deep == 1) {
-            if (currentPage != 'Home page') navMenu += `<li><a href="../index.html" class="header__link">home</a></li>`;
-            if (currentPage != 'My portfolio') navMenu += `<li><a href="../portfolio.html" class="header__link">portfolio</a></li>`;
-            if (currentPage != 'About me') navMenu += `<li><a href="../about.html" class="header__link">about</a></li>`;
-            if (currentPage != 'My skills') navMenu += `<li><a href="../skills.html" class="header__link">skills</a></li>`;
-            if (currentPage != 'My contacts') navMenu += `<li><a href="../contacts.html" class="header__link">contacts</a></li>`;
-        }
-        if (deep == 2) {
-            if (currentPage != 'Home page') navMenu += `<li><a href="../../index.html" class="header__link">home</a></li>`;
-            if (currentPage != 'My portfolio') navMenu += `<li><a href="../../portfolio.html" class="header__link">portfolio</a></li>`;
-            if (currentPage != 'About me') navMenu += `<li><a href="../../about.html" class="header__link">about</a></li>`;
-            if (currentPage != 'My skills') navMenu += `<li><a href="../../skills.html" class="header__link">skills</a></li>`;
-            if (currentPage != 'My contacts') navMenu += `<li><a href="../../contacts.html" class="header__link">contacts</a></li>`;
+        if (langEn) {
+            switch (deep) {
+                case 0: {
+                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index-en.html">Home</a></li>`;
+                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio-en.html">My portfolio</a></li>`;
+                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about-en.html">About me</a></li>`;
+                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills-en.html">My skills</a></li>`;
+                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts-en.html">My contacts</a></li>`;
+                } break;
+                case 1: {
+                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" ../>href="index-en.html">Home</a></li>`;
+                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../portfolio-en.html">My portfolio</a></li>`;
+                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../about-en.html">About me</a></li>`;
+                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../skills-en.html">My skills</a></li>`;
+                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../contacts-en.html">My contacts</a></li>`;
+
+                } break;
+                case 2: {
+                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link"../../>href="index-en.html">Home</a></li>`;
+                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio-en.html">My portfolio</a></li>`;
+                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about-en.html">About me</a></li>`;
+                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills-en.html">My skills</a></li>`;
+                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../contacts-en.html">My contacts</a></li>`;
+                }
+            }
+        } else {
+            switch (deep) {
+                case 0: {
+                    if (currentPage != 'Головна') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index.html">Головна</a></li>`;
+                    if (currentPage != 'Моє портфоліо') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">Моє портфоліо</a></li>`;
+                    if (currentPage != 'Про мене') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about.html">Про мене</a></li>`;
+                    if (currentPage != 'Мої навички') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills.html">Мої навички</a></li>`;
+                    if (currentPage != 'Мої контакти') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts.html">Мої контакти</a></li>`;
+                } break;
+                case 1: {
+                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" ../>href="index.html">Home</a></li>`;
+                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../portfolio.html">My portfolio</a></li>`;
+                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../about.html">About me</a></li>`;
+                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../skills.html">My skills</a></li>`;
+                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../contacts.html">My contacts</a></li>`;
+
+                } break;
+                case 2: {
+                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link"../../>href="index.html">Home</a></li>`;
+                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio.html">My portfolio</a></li>`;
+                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about.html">About me</a></li>`;
+                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills.html">My skills</a></li>`;
+                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../contacts.html">My contacts</a></li>`;
+                }
+            }
         }
 
         return navMenu;
     }
     let logo = '';
     switch (deep) {
-        case 0: logo = '<img src="img/logo-transparent.png" alt="logo" class="header__logo_img">';
+        case 0: logo = '<img src="img/logo-transparent.png" alt="logo" class="header-logo">';
             break;
-        case 1: logo = '<img src="../img/logo-transparent.png" alt="logo" class="header__logo_img">'
+        case 1: logo = '<img src="../img/logo-transparent.png" alt="logo" class="header-logo">'
             break;
-        case 2: logo = '<img src="../../img/logo-transparent.png" alt="logo" class="header__logo_img">'
+        case 2: logo = '<img src="../../img/logo-transparent.png" alt="logo" class="header-logo">'
     }
 
     header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary menu">
     <div class="container-fluid header-menu">
         <a href="index.html" title="logo">
-            <div class="header-logo"></div>
+            ${logo}
         </a>
-        <div class="mob-lang-select">
-            <a class="lang-select" href="#">UA</a>
+        <div class="mob-lang-select" >
+            <a ${langSelectMobUa} href="${hrefLangUA()}">UA</a>
             <div class="vertical"></div>
-            <a href="#">EN</a>
+            <a ${langSelectMobEn} href="${hrefLangEN()}">EN</a>
         </div>
         <div class="header-burger navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -58,17 +149,16 @@ function drawHeader(currentPage, deep) {
                 ${drawMenu()}
                 <li class="nav-item dropdown" id="navlang">
                     <span class="nav-link dropdown-toggle menu-link" role="button" data-bs-toggle="dropdown"
-                        aria-expanded="false">
-                        UA</span>
+                        aria-expanded="false">${langSelect}</span>
                     <ul class="dropdown-menu lang">
-                        <li><a class="dropdown-item lang" href="#">UA</a></li>
-                        <li><a class="dropdown-item lang" href="#">EN</a></li>
+                        <li><a class="dropdown-item lang" href="${hrefLangUA()}">UA</a></li>
+                        <li><a class="dropdown-item lang" href="${hrefLangEN()}">EN</a></li>
                     </ul>
                 </li>
             </ul>
             <div class="flash-btn">
                 <div class="menu-flash"></div>
-                <button class="header-btn popup-link" href="#popup">Send message</button>
+                <button class="header-btn popup-link" href="#popup">${headerBtn}</button>
             </div>
             <div class="header-icon-social">
                 <a href="https://www.facebook.com/alexandr.meleshko.9" class="social-link icon" title="facebook"
@@ -90,6 +180,12 @@ function drawHeader(currentPage, deep) {
 }
 
 function drawFooter(currentPage) {
+    let footerInc;
+    if (langEn) {
+        footerInc = "Developer Alexander Meleshko, Inc. All rights reserved."
+    } else {
+        footerInc = "Розробник Олександр Мелешко. Всі права захищено."
+    }
     footer.innerHTML = `
     <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="facebook" viewBox="0 0 16 16" fill='currentColor'>
@@ -111,7 +207,7 @@ function drawFooter(currentPage) {
     <div class="container-fluid">
         <div class="container">
             <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
-                <p>© 2023 Developer Alexander Meleshko, Inc. All rights reserved.</p>
+                <p>© 2023 ${footerInc}</p>
                 <ul class="list-unstyled d-flex">
                     <li class="ms-3"><a class="link-body-emphasis" href="https://www.facebook.com/alexandr.meleshko.9" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#facebook"></use></svg></a></li>
                     <li class="ms-3"><a class="link-body-emphasis" href="https://twitter.com/AleksandrMel83" target="blank"><svg class="bi socialicon" width="24" height="24"><use xlink:href="#twitter"></use></svg></a></li>

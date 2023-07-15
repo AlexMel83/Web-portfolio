@@ -251,7 +251,7 @@ label {
     font-family: "Open Sans";
     font-weight: 700;
     font-size: 16px;
-    line-height: 22px;
+    line-height: 16px;
     cursor: pointer
 }
 
@@ -294,8 +294,6 @@ label {
 
 .header-logo {
     z-index: 5;
-    background-image: url(../img/logo-transparent.png);
-    background-size: cover;
     width: 100px;
     height: 50px;
     position: relative;
@@ -391,6 +389,7 @@ label {
 
     .mob-lang-select.active a.lang-select {
         font-weight: 700;
+        text-decoration: underline;
     }
 
     .dropdown-menu.show {
@@ -570,6 +569,12 @@ label {
     .menu-iconsocial {
         display: flex;
         gap: 38px
+    }
+
+    /* footer */
+    .py-4 {
+        padding-top: 0 !important;
+        padding-bottom: 0 !important;
     }
 
     .footer {

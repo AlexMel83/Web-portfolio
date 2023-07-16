@@ -426,7 +426,7 @@ label {
     flex-direction: column;
     align-items: stretch;
     padding: 45px 80px 52px;
-    width: 680px;
+    max-width: 680px;
     background: var(--color-green-300);
     position: relative;
     opacity: 0;
@@ -439,7 +439,7 @@ label {
     flex-direction: column;
     align-items: stretch;
     padding: 45px 80px 52px;
-    width: 680px;
+    max-width: 680px;
     background: var(--color-green-300);
 }
 
@@ -853,6 +853,10 @@ input:focus {
     .footer__text {
         text-align: center;
     }
+
+    .list-unstyled {
+        margin-bottom: 0;
+    }
 }
 
 @media (max-width: 768px) {
@@ -862,7 +866,7 @@ input:focus {
 
     .popup-content,
     .contact-content {
-        width: 95vw;
+        max-width: 95vw;
         padding: 40px 20px;
     }
 }

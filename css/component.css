@@ -823,9 +823,15 @@ input:focus {
     }
 
     /* footer */
-    .py-4 {
+    .py-4,
+    .my-4 {
         padding-top: 0 !important;
         padding-bottom: 0 !important;
+        margin-bottom: 0 !important;
+    }
+
+    .my-4 p {
+        margin-bottom: 0 !important;
     }
 
     .footer {

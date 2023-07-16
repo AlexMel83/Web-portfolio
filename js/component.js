@@ -156,7 +156,6 @@ function drawHeader(currentPage, deep) {
                 </li>
             </ul>
             <div class="flash-btn">
-                <div class="menu-flash"></div>
                 <button class="header-btn popup-link" href="#popup">${headerBtn}</button>
             </div>
             <div class="header-icon-social">
@@ -299,7 +298,7 @@ function drawModal() {
                         </div>
                         <div class="form-phone">
                             <label for="phone">${footerLabelPhone} *</label>
-                            <br><input required type="text" name="phone" class="phone" id="phone"
+                            <br><input required type="tel" name="phone" class="phone" id="phone"
                                 placeholder="+38 (___) ___-__-__" autocomplete="on">
                             <div class="msg-error"></div>
                         </div>
@@ -616,6 +615,11 @@ if (email.length) {
     }
 }
 
+// INPUTMASK +38 (___) ___-__-__
+$(".phone").inputmask({
+    mask: "+38 (999) 999-99-99",
+    greedy: false,
+});
 if (phone.length) {
     for (let i = 0; i < phone.length; i++) {
         let element = phone[i];
@@ -659,11 +663,6 @@ if (phone.length) {
             } else {
                 phoneCorrect = true;
             }
-            // INPUTMASK +38 (___) ___-__-__
-            $(".phone").inputmask({
-                mask: "+38 (999) 999-99-99",
-                greedy: false,
-            });
             validationSuccess();
         };
     }

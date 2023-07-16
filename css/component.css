@@ -293,8 +293,6 @@ label {
     margin-bottom: 40px;
 }
 
-
-
 .header-logo {
     z-index: 5;
     width: 100px;
@@ -704,16 +702,6 @@ input:focus {
         position: relative;
         width: 200px;
         margin: 0 auto;
-    }
-
-    .menu-flash {
-        background-image: url(../images/flash.svg);
-        position: absolute;
-        width: 112px;
-        height: 162px;
-        bottom: 10px;
-        right: 118px;
-        z-index: 1;
     }
 
     .header-btn {

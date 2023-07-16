@@ -31,19 +31,44 @@
 
 			<h1 class="content__title">My contacts</h1>
 			<h2 class="content__tittle_h2">Write me a message or give me a phone for feedback with you.</h2>
-			<form class="content__form form">
-				<input type="text" class="form__input" name="name" placeholder="your name">
-				<input type="text" class="form__input" name="phone" value="+380">
-				<textarea name="textarea" id="" class="form__input form__input_textarea"
-					placeholder="write me"></textarea>
-				<div class="form__chk">
-					<input type="checkbox" name="chk1" value="1" class="form__chk_chk">
-					<span class="form__chk_chk">I consent to the processing of my personal data and have read</span>
-					<a href="https://cfhope.in.ua/privacy-policy/" class="form__chk_chk" target="blank">privacy
-						policy</a>
+			<div class="contact-content">
+				<h3 class="popup-title">Write to us</h3>
+				<div class="popup-text">Fill out the form and we will definitely contact you to clarify the details.
 				</div>
-				<input type="submit" name="send" value="send form" class="form__input form__input_button">
-			</form>
+				<form class="popup-form" action="#" method="post" accept-charset="utf-8" id="popup-registration-form">
+					<div class="form-firstName">
+						<label for="firstName">First name *</label>
+						<br><input maxlength="15" required type="text" name="firstName" class="firstName" id="firstName"
+							placeholder="First name">
+						<div class="msg-error"></div>
+					</div>
+					<div class="form-lastName">
+						<label for="lastName">Last name</label>
+						<br><input maxlength="30" type="text" name="lastName" class="lastName" id="lastName"
+							placeholder="Last name">
+						<div class="msg-error"></div>
+					</div>
+					<div class="form-email">
+						<label for="email">Email *</label>
+						<br><input maxlength="25" required type="email" name="email" class="email" id="email"
+							placeholder="email@gmail.com" autocomplete="on">
+						<div class="msg-error"></div>
+					</div>
+					<div class="form-phone">
+						<label for="phone">Phone *</label>
+						<br><input required type="text" name="phone" class="phone" id="phone"
+							placeholder="+38 (___) ___-__-__" autocomplete="on">
+						<div class="msg-error"></div>
+					</div>
+					<button type="submit" class="popup-btn submit-button" disabled="disabled">Send</button>
+					<input type="hide" name="organization_id" value="103" class="inputhide">
+				</form>
+				<div class="popup-ofert caption">By submitting an application, you automatically
+					<a href="politic-of-confidenc-en.html" target="_blank" class="popup-ofert-a">agree to the public
+						offer and consent to
+						the processing of personal data.</a>
+				</div>
+			</div>
 
 			<h2 class="content__title_h2">Or message me on social media</h2>
 

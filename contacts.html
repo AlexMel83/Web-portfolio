@@ -32,19 +32,41 @@
 			<h1 class="content__title">Мої контакти</h1>
 			<h2 class="content__tittle_h2">Напишіть мені повідомлення або напишіть свій телефон для зворотного зв'язку з
 				вами.</h2>
-			<form class="content__form form">
-				<input type="text" class="form__input" name="name" placeholder="Ваше ім'я">
-				<input type="text" class="form__input" name="phone" value="+380">
-				<textarea name="textarea" id="" class="form__input form__input_textarea"
-					placeholder="Напишіть мені"></textarea>
-				<div class="form__chk">
-					<input type="checkbox" name="chk1" value="1" class="form__chk_chk">
-					<span class="form__chk_chk">Я даю згоду на обробку моїх персональних даних і прочитав</span>
-					<a href="https://cfhope.in.ua/privacy-policy/" class="form__chk_chk" target="blank">політику
-						конфіденційності</a>
-				</div>
-				<input type="submit" name="send" value="Відправити" class="form__input form__input_button">
-			</form>
+			<div class="contact-content">
+				<h3 class="popup-title">Залишіть нам свої контакти</h3>
+				<div class="popup-text">Заповніть форму і ми обов'язково зв'яжемося з вами для уточнення деталей.</div>
+				<form class="popup-form" action="#" method="post" accept-charset="utf-8" id="popup-registration-form">
+					<div class="form-firstName">
+						<label for="firstName">Ім'я *</label>
+						<br><input maxlength="15" required type="text" name="firstName" class="firstName" id="firstName"
+							placeholder="Ім'я">
+						<div class="msg-error"></div>
+					</div>
+					<div class="form-lastName">
+						<label for="lastName">Прізвище</label>
+						<br><input maxlength="30" type="text" name="lastName" class="lastName" id="lastName"
+							placeholder="Прізвище">
+						<div class="msg-error"></div>
+					</div>
+					<div class="form-email">
+						<label for="email">Електронна пошта *</label>
+						<br><input maxlength="25" required type="email" name="email" class="email" id="email"
+							placeholder="email@gmail.com" autocomplete="on">
+						<div class="msg-error"></div>
+					</div>
+					<div class="form-phone">
+						<label for="phone">Телефон *</label>
+						<br><input required type="text" name="phone" class="phone" id="phone"
+							placeholder="+38 (___) ___-__-__" autocomplete="on">
+						<div class="msg-error"></div>
+					</div>
+					<button type="submit" class="popup-btn submit-button" disabled="disabled">Відправити</button>
+					<input type="hide" name="organization_id" value="103" class="inputhide">
+				</form>
+				<div class="popup-ofert caption">Надсилаючи заявку,
+					Ви автоматично погоджуєтесь з публічною офертою та надаєте <a href="politic-of-confidenc.html"
+						target="_blank" class="popup-ofert-a">згоду на обробку персональних даних.</a></div>
+			</div>
 
 			<h2 class="content__title_h2">Або напишіть мені в соціальних мережах</h2>
 

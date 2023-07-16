@@ -57,7 +57,6 @@ h3.home {
 
 .home__buttoncv:hover {
     border-radius: 10px;
-    text-replace: all 0.8s ease 0.2s;
     box-shadow: 0 0 40px rgba(0, 255, 0, 0.6);
 }
 
@@ -223,7 +222,7 @@ h3.home {
     padding-bottom: 20px;
 }
 
-.about__card_text {
+.about__card-text {
     text-align: center;
 }
 
@@ -470,7 +469,7 @@ h1.service__h1 {
     height: 125px;
 }
 
-.social__block_button {
+.social__block-button {
     display: grid;
     grid-template-columns: 70px 1fr;
 }
@@ -592,7 +591,7 @@ h1.service__h1 {
         grid-template-columns: 1fr 1fr;
     }
 
-    .social__block_button {
+    .social__block-button {
         justify-self: center;
         display: grid;
         grid-template-columns: 70px 1fr;

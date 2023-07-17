@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     <h3 class="popup-title">${popupTitle}</h3>
                     <div class="popup-text">${popupText}</div>
                     <form class="popup-form" action="#" method="post" accept-charset="utf-8"
-                        id="popupform">
+                        id="popup-form">
                         <div class="form-firstName">
                             <label for="firstName">${footerLabelName} *</label>
                             <br><input maxlength="15" required type="text" name="firstName" class="firstName" id="firstName"
@@ -673,13 +673,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const TOKEN = "6116584937:AAGum0MhU8g-hRTi-oRcdJZGEQ1MWbUts14";
     const CHAT_ID = "-1001877111884";
     const form = document.getElementById('form');
+    const popupform = document.getElementById('popup-form');
     const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-    const success = document.getElementById('modal-success-window');
 
     //Meaages and titles for popup-success window
     let succMessage = document.getElementById("popup-success-text");
-    let messageUA =
-        "Вже найближчим часом ми зв’яжемось з вами для уточнення деталей.";
+    let messageUA = "Вже найближчим часом ми зв’яжемось з вами для уточнення деталей.";
     let messageEN = "We will contact you soon to clarify the details.";
     let errMessageUA = "Сервер тимчасово перевантажений.";
     let errMessageEN = "The server is temporarily overloaded.";
@@ -689,51 +688,94 @@ document.addEventListener('DOMContentLoaded', function () {
     let errMessageTitleUA = "Сталась помилка";
     let errMessageTitleEN = "An error occurred";
 
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
+    if (popupform) {
+        popupform.addEventListener('submit', function (e) {
+            e.preventDefault();
 
-        let message = `<b>Asign from site!</b>\n`;
-        message += `<b>First name: </b> ${this.firstName.value}\n`;
-        message += `<b>Last name: </b> ${this.lastName.value}\n`;
-        message += `<b>Email: </b> ${this.email.value}\n`;
-        message += `<b>Phone: </b> ${this.phone.value}\n`;
+            let message = `<b>Asign from site!</b>\n`;
+            message += `<b>First name: </b> ${this.firstName.value}\n`;
+            message += `<b>Last name: </b> ${this.lastName.value}\n`;
+            message += `<b>Email: </b> ${this.email.value}\n`;
+            message += `<b>Phone: </b> ${this.phone.value}\n`;
 
-        axios.post(URI_API, {
-            chat_id: CHAT_ID,
-            parse_mode: 'html',
-            text: message
-        })
+            axios.post(URI_API, {
+                chat_id: CHAT_ID,
+                parse_mode: 'html',
+                text: message
+            })
 
-            .then((res) => {
-                this.firstName.value = "";
-                this.lastName.value = "";
-                this.email.value = "";
-                this.phone.value = "";
-                if (langEn) {
-                    succMessage.textContent = messageEN;
-                    succMessage.textContent =
-                        messageTitleEN;
-                } else {
-                    succMessage.textContent = messageUA;
-                    messageTitle.textContent =
-                        messageTitleUA;
-                }
-                $("#modal-success-window").modal("show");
+                .then(() => {
+                    this.firstName.value = "";
+                    this.lastName.value = "";
+                    this.email.value = "";
+                    this.phone.value = "";
+                    if (langEn) {
+                        succMessage.textContent = messageEN;
+                        messageTitle.textContent = messageTitleEN;
+                    } else {
+                        succMessage.textContent = messageUA;
+                        messageTitle.textContent = messageTitleUA;
+                    }
+                    $("#modal-success-window").modal("show");
+                })
+                .catch(() => {
+                    if (langEn) {
+                        succMessage.textContent = errMessageEN;
+                        messageTitle.textContent = errMessageTitleEN;
+                    } else {
+                        succMessage.textContent = errMessageUA;
+                        messageTitle.textContent = errMessageTitleUA;
+                    }
+                })
+                .finally(() => {
+                    console.log('End');
+                })
+        });
+    }
+
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            let message = `<b>Asign from site!</b>\n`;
+            message += `<b>First name: </b> ${this.firstName.value}\n`;
+            message += `<b>Last name: </b> ${this.lastName.value}\n`;
+            message += `<b>Email: </b> ${this.email.value}\n`;
+            message += `<b>Phone: </b> ${this.phone.value}\n`;
+
+            axios.post(URI_API, {
+                chat_id: CHAT_ID,
+                parse_mode: 'html',
+                text: message
             })
-            .catch(() => {
-                if (langEn) {
-                    succMessage.textContent = errMessageEN;
-                    messageTitle.textContent =
-                        errMessageTitleEN;
-                } else {
-                    succMessage.textContent = errMessageUA;
-                    messageTitle.textContent =
-                        errMessageTitleUA;
-                }
-            })
-            .finally(() => {
-                console.log('End');
-            })
-    });
+
+                .then(() => {
+                    this.firstName.value = "";
+                    this.lastName.value = "";
+                    this.email.value = "";
+                    this.phone.value = "";
+                    if (langEn) {
+                        succMessage.textContent = messageEN;
+                        messageTitle.textContent = messageTitleEN;
+                    } else {
+                        succMessage.textContent = messageUA;
+                        messageTitle.textContent = messageTitleUA;
+                    }
+                    $("#modal-success-window").modal("show");
+                })
+                .catch(() => {
+                    if (langEn) {
+                        succMessage.textContent = errMessageEN;
+                        messageTitle.textContent = errMessageTitleEN;
+                    } else {
+                        succMessage.textContent = errMessageUA;
+                        messageTitle.textContent = errMessageTitleUA;
+                    }
+                })
+                .finally(() => {
+                    console.log('End');
+                })
+        });
+    }
 
 });

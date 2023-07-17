@@ -458,6 +458,7 @@ label {
     padding: 45px 80px 52px;
     max-width: 680px;
     background: var(--color-green-300);
+    margin: 0 auto;
 }
 
 .popup-close {

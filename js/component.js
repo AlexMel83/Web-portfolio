@@ -1,135 +1,137 @@
-let header = document.querySelector('header');
-let footer = document.querySelector('footer');
-let href = document.location.pathname;
-let currentPage = document.title;
-let deep = 0;
-let html = href.includes('.html'), langEn = href.includes('-en'), isIndex = href.includes('index'),
-    lengthPath = href.length, haveHashtag = href.includes('#');
+document.addEventListener('DOMContentLoaded', function () {
 
-function hrefLangUA() {
-    let hrefUa = document.location.pathname
-    if (langEn) {
-        if (html) {
-            let placeHtml = hrefUa.indexOf('-en.html');
-            hrefUa = hrefUa.slice(0, placeHtml);
-            hrefUa = hrefUa.concat('.html');
-        } else {
-            let placeHtml = hrefUa.indexOf('-en');
-            hrefUa = hrefUa.slice(0, placeHtml);
-            hrefUa = hrefUa.concat('.html');
-        }
-    }
-    return hrefUa;
-}
+    let header = document.querySelector('header');
+    let footer = document.querySelector('footer');
+    let href = document.location.pathname;
+    let currentPage = document.title;
+    let deep = 0;
+    let html = href.includes('.html'), langEn = href.includes('-en'), isIndex = href.includes('index'),
+        lengthPath = href.length, haveHashtag = href.includes('#');
 
-function hrefLangEN() {
-    let hrefEn = document.location.pathname;
-    if (!langEn) {
-        if (haveHashtag) {
-            if (html) {
-                let placeHtml = hrefEn.indexOf('.html');
-                hrefEn = hrefEn.slice(0, placeHtml);
-                hrefEn = hrefEn.concat('-en.html');
-            } else {
-                if (lengthPath == 1) {
-                    let placeHtml = hrefEn.indexOf('#');
-                    hrefEn = hrefEn.slice(0, placeHtml);
-                    hrefEn = hrefEn.concat('index-en.html');
-                } else {
-                    let placeHtml = hrefEn.indexOf('#');
-                    hrefEn = hrefEn.slice(0, placeHtml);
-                    hrefEn = hrefEn.concat('-en.html');
-                }
-            }
-        } else {
-            if (html) {
-                let placeHtml = hrefEn.indexOf('.html');
-                hrefEn = hrefEn.slice(0, placeHtml);
-                hrefEn = hrefEn.concat('-en.html');
-            } else {
-                if (lengthPath == 1) {
-                    hrefEn = hrefEn.concat('index-en.html');
-                } else {
-                    hrefEn = hrefEn.concat('-en.html');
-                }
-            }
-        }
-    }
-    return hrefEn;
-}
-
-function drawHeader(currentPage, deep) {
-    let headerBtn = "надіслати повідомлення", langSelect = "UA", langSelectMobUa = `class="lang-select"`, langSelectMobEn = "";
-    if (langEn) {
-        headerBtn = "Send message", langSelect = "EN", langSelectMobUa = "", langSelectMobEn = `class="lang-select"`;
-    }
-
-    function drawMenu() {
-        let navMenu = "";
+    function hrefLangUA() {
+        let hrefUa = document.location.pathname
         if (langEn) {
-            switch (deep) {
-                case 0: {
-                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index-en.html">Home</a></li>`;
-                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio-en.html">My portfolio</a></li>`;
-                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about-en.html">About me</a></li>`;
-                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills-en.html">My skills</a></li>`;
-                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts-en.html">My contacts</a></li>`;
-                } break;
-                case 1: {
-                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" ../>href="index-en.html">Home</a></li>`;
-                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../portfolio-en.html">My portfolio</a></li>`;
-                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../about-en.html">About me</a></li>`;
-                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../skills-en.html">My skills</a></li>`;
-                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../contacts-en.html">My contacts</a></li>`;
-
-                } break;
-                case 2: {
-                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link"../../>href="index-en.html">Home</a></li>`;
-                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio-en.html">My portfolio</a></li>`;
-                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about-en.html">About me</a></li>`;
-                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills-en.html">My skills</a></li>`;
-                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../contacts-en.html">My contacts</a></li>`;
-                }
+            if (html) {
+                let placeHtml = hrefUa.indexOf('-en.html');
+                hrefUa = hrefUa.slice(0, placeHtml);
+                hrefUa = hrefUa.concat('.html');
+            } else {
+                let placeHtml = hrefUa.indexOf('-en');
+                hrefUa = hrefUa.slice(0, placeHtml);
+                hrefUa = hrefUa.concat('.html');
             }
-        } else {
-            switch (deep) {
-                case 0: {
-                    if (currentPage != 'Головна') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index.html">Головна</a></li>`;
-                    if (currentPage != 'Моє портфоліо') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">Моє портфоліо</a></li>`;
-                    if (currentPage != 'Про мене') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about.html">Про мене</a></li>`;
-                    if (currentPage != 'Мої навички') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills.html">Мої навички</a></li>`;
-                    if (currentPage != 'Мої контакти') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts.html">Мої контакти</a></li>`;
-                } break;
-                case 1: {
-                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" ../>href="index.html">Home</a></li>`;
-                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../portfolio.html">My portfolio</a></li>`;
-                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../about.html">About me</a></li>`;
-                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../skills.html">My skills</a></li>`;
-                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../contacts.html">My contacts</a></li>`;
+        }
+        return hrefUa;
+    }
 
-                } break;
-                case 2: {
-                    if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../index.html">Home</a></li>`;
-                    if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio.html">My portfolio</a></li>`;
-                    if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about.html">About me</a></li>`;
-                    if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills.html">My skills</a></li>`;
-                    if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../contacts.html">My contacts</a></li>`;
+    function hrefLangEN() {
+        let hrefEn = document.location.pathname;
+        if (!langEn) {
+            if (haveHashtag) {
+                if (html) {
+                    let placeHtml = hrefEn.indexOf('.html');
+                    hrefEn = hrefEn.slice(0, placeHtml);
+                    hrefEn = hrefEn.concat('-en.html');
+                } else {
+                    if (lengthPath == 1) {
+                        let placeHtml = hrefEn.indexOf('#');
+                        hrefEn = hrefEn.slice(0, placeHtml);
+                        hrefEn = hrefEn.concat('index-en.html');
+                    } else {
+                        let placeHtml = hrefEn.indexOf('#');
+                        hrefEn = hrefEn.slice(0, placeHtml);
+                        hrefEn = hrefEn.concat('-en.html');
+                    }
+                }
+            } else {
+                if (html) {
+                    let placeHtml = hrefEn.indexOf('.html');
+                    hrefEn = hrefEn.slice(0, placeHtml);
+                    hrefEn = hrefEn.concat('-en.html');
+                } else {
+                    if (lengthPath == 1) {
+                        hrefEn = hrefEn.concat('index-en.html');
+                    } else {
+                        hrefEn = hrefEn.concat('-en.html');
+                    }
                 }
             }
         }
-
-        return navMenu;
-    }
-    let logo = '';
-    switch (deep) {
-        case 0: logo = '<img src="img/logo-transparent.png" alt="logo" class="header-logo">';
-            break;
-        case 1: logo = '<img src="../img/logo-transparent.png" alt="logo" class="header-logo">'
-            break;
-        case 2: logo = '<img src="../../img/logo-transparent.png" alt="logo" class="header-logo">'
+        return hrefEn;
     }
 
-    header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary menu"> 
+    function drawHeader(currentPage, deep) {
+        let headerBtn = "надіслати повідомлення", langSelect = "UA", langSelectMobUa = `class="lang-select"`, langSelectMobEn = "";
+        if (langEn) {
+            headerBtn = "Send message", langSelect = "EN", langSelectMobUa = "", langSelectMobEn = `class="lang-select"`;
+        }
+
+        function drawMenu() {
+            let navMenu = "";
+            if (langEn) {
+                switch (deep) {
+                    case 0: {
+                        if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index-en.html">Home</a></li>`;
+                        if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio-en.html">My portfolio</a></li>`;
+                        if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about-en.html">About me</a></li>`;
+                        if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills-en.html">My skills</a></li>`;
+                        if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts-en.html">My contacts</a></li>`;
+                    } break;
+                    case 1: {
+                        if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" ../>href="index-en.html">Home</a></li>`;
+                        if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../portfolio-en.html">My portfolio</a></li>`;
+                        if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../about-en.html">About me</a></li>`;
+                        if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../skills-en.html">My skills</a></li>`;
+                        if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../contacts-en.html">My contacts</a></li>`;
+
+                    } break;
+                    case 2: {
+                        if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link"../../>href="index-en.html">Home</a></li>`;
+                        if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio-en.html">My portfolio</a></li>`;
+                        if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about-en.html">About me</a></li>`;
+                        if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills-en.html">My skills</a></li>`;
+                        if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../contacts-en.html">My contacts</a></li>`;
+                    }
+                }
+            } else {
+                switch (deep) {
+                    case 0: {
+                        if (currentPage != 'Головна') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="index.html">Головна</a></li>`;
+                        if (currentPage != 'Моє портфоліо') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="portfolio.html">Моє портфоліо</a></li>`;
+                        if (currentPage != 'Про мене') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="about.html">Про мене</a></li>`;
+                        if (currentPage != 'Мої навички') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="skills.html">Мої навички</a></li>`;
+                        if (currentPage != 'Мої контакти') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="contacts.html">Мої контакти</a></li>`;
+                    } break;
+                    case 1: {
+                        if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" ../>href="index.html">Home</a></li>`;
+                        if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../portfolio.html">My portfolio</a></li>`;
+                        if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../about.html">About me</a></li>`;
+                        if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../skills.html">My skills</a></li>`;
+                        if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../contacts.html">My contacts</a></li>`;
+
+                    } break;
+                    case 2: {
+                        if (currentPage != 'Home page') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../index.html">Home</a></li>`;
+                        if (currentPage != 'My portfolio') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../portfolio.html">My portfolio</a></li>`;
+                        if (currentPage != 'About me') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../about.html">About me</a></li>`;
+                        if (currentPage != 'My skills') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../skills.html">My skills</a></li>`;
+                        if (currentPage != 'My contacts') navMenu += `<li class="nav-item"><a class="nav-link menu-link" href="../../contacts.html">My contacts</a></li>`;
+                    }
+                }
+            }
+
+            return navMenu;
+        }
+        let logo = '';
+        switch (deep) {
+            case 0: logo = '<img src="img/logo-transparent.png" alt="logo" class="header-logo">';
+                break;
+            case 1: logo = '<img src="../img/logo-transparent.png" alt="logo" class="header-logo">'
+                break;
+            case 2: logo = '<img src="../../img/logo-transparent.png" alt="logo" class="header-logo">'
+        }
+
+        header.innerHTML = `<nav class="navbar navbar-expand-lg bg-body-tertiary menu"> 
     <div class="container-fluid header-menu">
     <a href="index.html" title="logo">
             ${logo}
@@ -175,16 +177,16 @@ function drawHeader(currentPage, deep) {
         </div>
     </div>
 </nav>`
-}
-
-function drawFooter(currentPage) {
-    let footerInc;
-    if (langEn) {
-        footerInc = "Developer Alexander Meleshko, Inc. All rights reserved."
-    } else {
-        footerInc = "Розробник Олександр Мелешко. Всі права захищено."
     }
-    footer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+
+    function drawFooter(currentPage) {
+        let footerInc;
+        if (langEn) {
+            footerInc = "Developer Alexander Meleshko, Inc. All rights reserved."
+        } else {
+            footerInc = "Розробник Олександр Мелешко. Всі права захищено."
+        }
+        footer.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
         <symbol id="facebook" viewBox="0 0 16 16" fill='currentColor'>
             <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"></path>
         </symbol>
@@ -216,68 +218,68 @@ function drawFooter(currentPage) {
         </div>
     </div>`;
 
-    document.body.innerHTML += `<svg class="scroll-up">
+        document.body.innerHTML += `<svg class="scroll-up">
                                     <use xlink:href="img/sprite.svg#scroll-up"></use>
                                 </svg>`
-}
+    }
 
-if (currentPage == 'Make table' || currentPage == 'JS-Calculator' || currentPage == 'Editable table' ||
-    currentPage == 'Editable sort table' || currentPage == 'Script for open popup windows' ||
-    currentPage == 'JS Stack TaskList' || currentPage == 'JS ToDoList' || currentPage == 'JavaScript Tic-Tac-Toe') deep = 1;
-if (currentPage == 'Maket' || currentPage == 'Second individual project' || currentPage == 'JS Game Snake') deep = 2;
+    if (currentPage == 'Make table' || currentPage == 'JS-Calculator' || currentPage == 'Editable table' ||
+        currentPage == 'Editable sort table' || currentPage == 'Script for open popup windows' ||
+        currentPage == 'JS Stack TaskList' || currentPage == 'JS ToDoList' || currentPage == 'JavaScript Tic-Tac-Toe') deep = 1;
+    if (currentPage == 'Maket' || currentPage == 'Second individual project' || currentPage == 'JS Game Snake') deep = 2;
 
-drawHeader(currentPage, deep);
-drawFooter(currentPage);
-drawModal();
+    drawHeader(currentPage, deep);
+    drawFooter(currentPage);
+    drawModal();
 
-let unlock = true;
-let menuClose = true;
-const timeout = 800;
-/* this code added toggleClass to btn for work burger-menu and block scrolling*/
-$(".header-burger").click(function () {
-    $(".header-burger, .header-menu, .header-logo, .mob-lang-select").toggleClass("active");
-});
+    let unlock = true;
+    let menuClose = true;
+    const timeout = 800;
+    /* this code added toggleClass to btn for work burger-menu and block scrolling*/
+    $(".header-burger").click(function () {
+        $(".header-burger, .header-menu, .header-logo, .mob-lang-select").toggleClass("active");
+    });
 
-$("#navbarSupportedContent").on("hidden.bs.collapse", function () {
-    $("body").removeClass("no_scrolling");
-});
-$("#navbarSupportedContent").on("show.bs.collapse", function () {
-    $("body").addClass("no_scrolling");
-});
-$(".navbar-nav>li>a").on("click", function () {
-    $(".navbar-collapse").collapse("hide");
-});
-$(".dropdown-menu>li>a, .nav-item>a").on("click", function () {
-    $(".navbar-collapse").collapse("hide");
-    $(".container-fluid").removeClass("active");
-    $(".header-burger, .header-menu, .header-logo, .mob-lang-select").removeClass("active");
-});
+    $("#navbarSupportedContent").on("hidden.bs.collapse", function () {
+        $("body").removeClass("no_scrolling");
+    });
+    $("#navbarSupportedContent").on("show.bs.collapse", function () {
+        $("body").addClass("no_scrolling");
+    });
+    $(".navbar-nav>li>a").on("click", function () {
+        $(".navbar-collapse").collapse("hide");
+    });
+    $(".dropdown-menu>li>a, .nav-item>a").on("click", function () {
+        $(".navbar-collapse").collapse("hide");
+        $(".container-fluid").removeClass("active");
+        $(".header-burger, .header-menu, .header-logo, .mob-lang-select").removeClass("active");
+    });
 
 
-function drawModal() {
-    let popupTitle, popupText, footerLabelName, footerLabelLastName, footerLabelEmail, footerLabelPhone,
-        footerBtnSubmit, footerOffert, popup2Close;
-    if (langEn) {
-        popupTitle = "Write to us", popupText = "Fill out the form and we will definitely contact you to clarify the details.", footerLabelName = "First name",
-            footerLabelLastName = "Last name", footerLabelEmail = "Email", footerLabelPhone = "Phone", footerBtnSubmit = "Send"
-        footerOffert = `By submitting an application, you automatically 
+    function drawModal() {
+        let popupTitle, popupText, footerLabelName, footerLabelLastName, footerLabelEmail, footerLabelPhone,
+            footerBtnSubmit, footerOffert, popup2Close;
+        if (langEn) {
+            popupTitle = "Write to us", popupText = "Fill out the form and we will definitely contact you to clarify the details.", footerLabelName = "First name",
+                footerLabelLastName = "Last name", footerLabelEmail = "Email", footerLabelPhone = "Phone", footerBtnSubmit = "Send"
+            footerOffert = `By submitting an application, you automatically 
         <a href="politic-of-confidenc-en.html" target="_blank" class="popup-ofert-a">agree to the public offer and consent to 
         the processing of personal data.</a>`, popup2Close = "Close";
-    } else {
-        popupTitle = "Залишіть нам свої контакти", popupText = "Заповніть форму і ми обов'язково зв'яжемося з вами для уточнення деталей.",
-            footerLabelName = "Ім'я", footerLabelLastName = "Прізвище", footerLabelEmail = "Електронна пошта",
-            footerLabelPhone = "Телефон", footerBtnSubmit = "Відправити", footerOffert = `Надсилаючи заявку, 
+        } else {
+            popupTitle = "Залишіть нам свої контакти", popupText = "Заповніть форму і ми обов'язково зв'яжемося з вами для уточнення деталей.",
+                footerLabelName = "Ім'я", footerLabelLastName = "Прізвище", footerLabelEmail = "Електронна пошта",
+                footerLabelPhone = "Телефон", footerBtnSubmit = "Відправити", footerOffert = `Надсилаючи заявку, 
             Ви автоматично погоджуєтесь з публічною офертою та надаєте <a href="politic-of-confidenc.html" target="_blank" 
             class="popup-ofert-a">згоду на обробку персональних даних.</a>`, popup2Close = "Закрити"
-    }
-    document.body.innerHTML += `<div class="popup" id="popup">
+        }
+        document.body.innerHTML += `<div class="popup" id="popup">
             <div class="popup-body">
                 <div class="popup-content">
                     <a href="#marker" class="popup-close close-popup" title="popup-close"></a>
                     <h3 class="popup-title">${popupTitle}</h3>
                     <div class="popup-text">${popupText}</div>
                     <form class="popup-form" action="#" method="post" accept-charset="utf-8"
-                        id="popup-registration-form">
+                        id="popupform">
                         <div class="form-firstName">
                             <label for="firstName">${footerLabelName} *</label>
                             <br><input maxlength="15" required type="text" name="firstName" class="firstName" id="firstName"
@@ -322,351 +324,416 @@ function drawModal() {
                 </div>
             </div>
         </div>`;
-}
-
-//variables ScrolUp btn
-const offset = 100;
-const scrollUp = document.querySelector(".scroll-up");
-const getTop = () => window.pageYOffset || document.documentElement.scrollTop;
-/* Code scrolUp btn */
-if (scrollUp) {
-    window.addEventListener("scroll", () => {
-        if (getTop() > offset) {
-            scrollUp.classList.add("scroll-up-active");
-        } else {
-            scrollUp.classList.remove("scroll-up-active");
-        }
-    });
-    scrollUp.addEventListener("click", () => {
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
-    });
-}
-
-//variables popup windovs
-const popupLinks = document.querySelectorAll(".popup-link");
-const body = document.querySelector("body");
-const lockPadding = document.querySelectorAll(".lock-padding");
-const popupCloseIcon = document.querySelectorAll(".close-popup");
-const forms = document.querySelectorAll(".popup-form");
-//"submit" button in registration form
-const buttonSubmit = document.querySelectorAll(".submit-button");
-let buttonSubmitPressed = false;
-//function popup windows
-/* modal window script */
-/* this script remove # from page with open popup */
-if (popupLinks.length > 0) {
-    for (let i = 0; i < popupLinks.length; i++) {
-        const popupLink = popupLinks[i];
-        popupLink.addEventListener("click", function (e) {
-            const popupName = popupLink.getAttribute("href").replace("#", "");
-            const curentPopup = document.getElementById(popupName);
-            popupOpen(curentPopup);
-            e.preventDefault();
-        });
     }
-}
 
-/* this script closed closest element whish has .popup classe */
-if (popupCloseIcon.length > 0) {
-    for (let i = 0; i < popupCloseIcon.length; i++) {
-        const el = popupCloseIcon[i];
-        el.addEventListener("click", function (e) {
-            popupClose(el.closest(".popup"));
-            e.preventDefault();
-        });
-    }
-}
-
-function popupOpen(curentPopup) {
-    if (curentPopup && unlock) {
-        curentPopup.style.display = "unset"; //allows animation
-        const popupActive = document.querySelector(".popup.open");
-        if (popupActive) {
-            popupClose(popupActive, false);
-        } else {
-            bodyLock();
-        }
-        curentPopup.classList.add("open");
-        curentPopup.addEventListener("click", function (e) {
-            if (!e.target.closest(".popup-content")) {
-                popupClose(e.target.closest(".popup"));
+    //variables ScrolUp btn
+    const offset = 100;
+    const scrollUp = document.querySelector(".scroll-up");
+    const getTop = () => window.pageYOffset || document.documentElement.scrollTop;
+    /* Code scrolUp btn */
+    if (scrollUp) {
+        window.addEventListener("scroll", () => {
+            if (getTop() > offset) {
+                scrollUp.classList.add("scroll-up-active");
+            } else {
+                scrollUp.classList.remove("scroll-up-active");
             }
         });
+        scrollUp.addEventListener("click", () => {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth",
+            });
+        });
     }
-}
 
-function popupClose(popupActive, doUnlock = true) {
-    if (unlock) {
-        popupActive.classList.remove("open");
-        if (doUnlock) {
-            bodyUnLock();
+    //variables popup windovs
+    const popupLinks = document.querySelectorAll(".popup-link");
+    const body = document.querySelector("body");
+    const lockPadding = document.querySelectorAll(".lock-padding");
+    const popupCloseIcon = document.querySelectorAll(".close-popup");
+    const forms = document.querySelectorAll(".popup-form");
+    //"submit" button in registration form
+    const buttonSubmit = document.querySelectorAll(".submit-button");
+    let buttonSubmitPressed = false;
+    //function popup windows
+    /* modal window script */
+    /* this script remove # from page with open popup */
+    if (popupLinks.length > 0) {
+        for (let i = 0; i < popupLinks.length; i++) {
+            const popupLink = popupLinks[i];
+            popupLink.addEventListener("click", function (e) {
+                const popupName = popupLink.getAttribute("href").replace("#", "");
+                const curentPopup = document.getElementById(popupName);
+                popupOpen(curentPopup);
+                e.preventDefault();
+            });
         }
     }
-}
 
-/* function for lock body and forbid scrol page*/
-function bodyLock() {
-    const lockPaddingValue = window.innerWidth - body.offsetWidth + "px";
-
-    if (lockPadding.length > 0) {
-        for (let i = 0; i < lockPadding.length; i++) {
-            const el = lockPadding[i];
-            el.style.paddingRight = lockPaddingValue;
+    /* this script closed closest element whish has .popup classe */
+    if (popupCloseIcon.length > 0) {
+        for (let i = 0; i < popupCloseIcon.length; i++) {
+            const el = popupCloseIcon[i];
+            el.addEventListener("click", function (e) {
+                popupClose(el.closest(".popup"));
+                e.preventDefault();
+            });
         }
     }
 
-    body.classList.add("lock");
-    body.style.paddingRight = lockPaddingValue;
-    if (menuClose) {
-        unlock = false;
-        setTimeout(function () {
-            unlock = true;
-        }, timeout);
-    }
-}
-
-function bodyUnLock() {
-    setTimeout(function () {
-        for (let i = 0; i < lockPadding.length; i++) {
-            const el = lockPadding[i];
-            el.style.paddingRight = "0px";
+    function popupOpen(curentPopup) {
+        if (curentPopup && unlock) {
+            curentPopup.style.display = "unset"; //allows animation
+            const popupActive = document.querySelector(".popup.open");
+            if (popupActive) {
+                popupClose(popupActive, false);
+            } else {
+                bodyLock();
+            }
+            curentPopup.classList.add("open");
+            curentPopup.addEventListener("click", function (e) {
+                if (!e.target.closest(".popup-content")) {
+                    popupClose(e.target.closest(".popup"));
+                }
+            });
         }
+    }
+
+    function popupClose(popupActive, doUnlock = true) {
+        if (unlock) {
+            popupActive.classList.remove("open");
+            if (doUnlock) {
+                bodyUnLock();
+            }
+        }
+    }
+
+    /* function for lock body and forbid scrol page*/
+    function bodyLock() {
+        const lockPaddingValue = window.innerWidth - body.offsetWidth + "px";
+
+        if (lockPadding.length > 0) {
+            for (let i = 0; i < lockPadding.length; i++) {
+                const el = lockPadding[i];
+                el.style.paddingRight = lockPaddingValue;
+            }
+        }
+
+        body.classList.add("lock");
+        body.style.paddingRight = lockPaddingValue;
         if (menuClose) {
-            body.classList.remove("lock");
-            body.style.paddingRight = "0px";
+            unlock = false;
+            setTimeout(function () {
+                unlock = true;
+            }, timeout);
         }
-    }, timeout);
-    if (!menuClose) {
-        unlock = false;
-        setTimeout(() => (unlock = true), timeout);
     }
-}
 
-document.addEventListener("keydown", function (e) {
-    if (e.which === 27 && !buttonSubmitPressed) {
-        const popupActive = document.querySelector(".popup.open");
-        popupClose(popupActive);
+    function bodyUnLock() {
+        setTimeout(function () {
+            for (let i = 0; i < lockPadding.length; i++) {
+                const el = lockPadding[i];
+                el.style.paddingRight = "0px";
+            }
+            if (menuClose) {
+                body.classList.remove("lock");
+                body.style.paddingRight = "0px";
+            }
+        }, timeout);
+        if (!menuClose) {
+            unlock = false;
+            setTimeout(() => (unlock = true), timeout);
+        }
     }
-});
 
-/*script for sinhronized closing of two modal windows using buttons*/
-const closePopupSuccess = document.querySelectorAll(".popup-success-btn");
-
-closePopupSuccess.forEach((btn) => {
-    btn.addEventListener("click", function (e) {
-        const popupActive = document.querySelector(".popup.open");
-        popupClose(popupActive);
-
-        /*to allow "Esc" button after all pop-up windows are closed*/
-        buttonSubmitPressed = false;
+    document.addEventListener("keydown", function (e) {
+        if (e.which === 27 && !buttonSubmitPressed) {
+            const popupActive = document.querySelector(".popup.open");
+            popupClose(popupActive);
+        }
     });
-});
 
-//variables validation forms
-let firstName = document.querySelectorAll(".firstName");
-let lastName = document.querySelectorAll(".lastName");
-let email = document.querySelectorAll(".email");
-let phone = document.querySelectorAll(".phone");
-let firstNameCorrect = false,
-    emailCorrect = false,
-    phoneCorrect = false;
-let validationPassed = false;
-let incorrectMsg = "";
-if (langEn) {
-    incorrectMsg = "The field is filled in incorrectly";
-} else {
-    incorrectMsg = "Поле заповнене некоректно";
-}
+    /*script for sinhronized closing of two modal windows using buttons*/
+    const closePopupSuccess = document.querySelectorAll(".popup-success-btn");
 
-//function validation forms
-$(document).ready(function () {
+    closePopupSuccess.forEach((btn) => {
+        btn.addEventListener("click", function (e) {
+            const popupActive = document.querySelector(".popup.open");
+            popupClose(popupActive);
+
+            /*to allow "Esc" button after all pop-up windows are closed*/
+            buttonSubmitPressed = false;
+        });
+    });
+
+    //variables validation forms
+    let firstName = document.querySelectorAll(".firstName");
+    let lastName = document.querySelectorAll(".lastName");
+    let email = document.querySelectorAll(".email");
+    let phone = document.querySelectorAll(".phone");
+    let firstNameCorrect = false,
+        emailCorrect = false,
+        phoneCorrect = false;
+    let validationPassed = false;
+    let incorrectMsg = "";
+    if (langEn) {
+        incorrectMsg = "The field is filled in incorrectly";
+    } else {
+        incorrectMsg = "Поле заповнене некоректно";
+    }
+
+    //function validation forms
+    $(document).ready(function () {
+        // INPUTMASK +38 (___) ___-__-__
+        jQuery(".phone").inputmask({
+            mask: "+38 (999) 999-99-99",
+            greedy: false,
+        });
+
+    });
+
+    function validationSuccess() {
+        for (let i = 0; i < buttonSubmit.length; i++) {
+            if (firstNameCorrect && emailCorrect && phoneCorrect) {
+                validationPassed = true;
+                buttonSubmit[i].removeAttribute("disabled");
+            } else {
+                buttonSubmit[i].setAttribute("disabled", "disabled");
+                validationPassed = false;
+            }
+        }
+    }
+    // '’-
+    if (firstName.length) {
+        for (let i = 0; i < firstName.length; i++) {
+            let regex = /[^A-ZА-ЯЁІЇЄa-zа-яіїёє'’-]/;
+            let element = firstName[i];
+            element.oninput = function () {
+                element.value = element.value.replace(regex, "");
+                if (element.value.length < 2) {
+                    firstNameCorrect = false;
+                } else {
+                    firstNameCorrect = true;
+                }
+                validationSuccess();
+            };
+            element.onblur = function () {
+                if (element.value.length < 2) {
+                    this.classList.remove("input-correct");
+                    this.classList.add("input-error");
+                    this.previousElementSibling.previousElementSibling.classList.remove(
+                        "input-correct"
+                    );
+                    this.previousElementSibling.previousElementSibling.classList.add(
+                        "input-error"
+                    );
+                    this.nextElementSibling.textContent = incorrectMsg;
+                    firstNameCorrect = false;
+                } else {
+                    this.classList.remove("input-error");
+                    this.classList.add("input-correct");
+                    this.previousElementSibling.previousElementSibling.classList.remove(
+                        "input-error"
+                    );
+                    this.previousElementSibling.previousElementSibling.classList.add(
+                        "input-correct"
+                    );
+                    this.nextElementSibling.textContent = "";
+                    firstNameCorrect = true;
+                }
+                validationSuccess();
+            };
+            element.onchange = function () {
+                if (element.value.length < 2) {
+                    firstNameCorrect = false;
+                } else {
+                    firstNameCorrect = true;
+                }
+                validationSuccess();
+            };
+        }
+    }
+
+    if (lastName.length) {
+        for (let i = 0; i < lastName.length; i++) {
+            let regex = /[^A-ZА-ЯЁІЇЄa-zа-яіїёє'’-]/;
+            let element = lastName[i];
+            element.oninput = function () {
+                element.value = element.value.replace(regex, "");
+            };
+        }
+    }
+
+    if (email.length) {
+        for (let i = 0; i < email.length; i++) {
+            let regex =
+                /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/;
+            let regexcyr = /[а-яА-ЯіІїЇёЁ]/g;
+            let element = email[i];
+            element.oninput = function () {
+                this.value = this.value.replace(regexcyr, "");
+                if (this.value.match(regex)) {
+                    emailCorrect = true;
+                } else {
+                    emailCorrect = false;
+                }
+                validationSuccess();
+            };
+            element.onblur = function () {
+                if (this.value.match(regex)) {
+                    this.classList.remove("input-error");
+                    this.classList.add("input-correct");
+                    this.previousElementSibling.previousElementSibling.classList.remove(
+                        "input-error"
+                    );
+                    this.previousElementSibling.previousElementSibling.classList.add(
+                        "input-correct"
+                    );
+                    this.nextElementSibling.textContent = "";
+                    emailCorrect = true;
+                } else {
+                    this.classList.remove("input-correct");
+                    this.classList.add("input-error");
+                    this.previousElementSibling.previousElementSibling.classList.remove(
+                        "input-correct"
+                    );
+                    this.previousElementSibling.previousElementSibling.classList.add(
+                        "input-error"
+                    );
+                    this.nextElementSibling.textContent = incorrectMsg;
+                    emailCorrect = false;
+                }
+                validationSuccess();
+            };
+            element.onchange = function () {
+                if (this.value.match(regex)) {
+                    emailCorrect = true;
+                } else {
+                    emailCorrect = false;
+                }
+                validationSuccess();
+            };
+        }
+    }
+
     // INPUTMASK +38 (___) ___-__-__
-    jQuery(".phone").inputmask({
+    $(".phone").inputmask({
         mask: "+38 (999) 999-99-99",
         greedy: false,
     });
-
-});
-
-function validationSuccess() {
-    for (let i = 0; i < buttonSubmit.length; i++) {
-        if (firstNameCorrect && emailCorrect && phoneCorrect) {
-            validationPassed = true;
-            buttonSubmit[i].removeAttribute("disabled");
-        } else {
-            buttonSubmit[i].setAttribute("disabled", "disabled");
-            validationPassed = false;
+    if (phone.length) {
+        for (let i = 0; i < phone.length; i++) {
+            let element = phone[i];
+            element.onblur = function () {
+                if (element.value.length < 19 || element.value[18] === "_") {
+                    this.classList.remove("input-correct");
+                    this.classList.add("input-error");
+                    this.previousElementSibling.previousElementSibling.classList.remove(
+                        "input-correct"
+                    );
+                    this.previousElementSibling.previousElementSibling.classList.add(
+                        "input-error"
+                    );
+                    this.nextElementSibling.textContent = incorrectMsg;
+                    phoneCorrect = false;
+                } else {
+                    this.classList.remove("input-error");
+                    this.classList.add("input-correct");
+                    this.previousElementSibling.previousElementSibling.classList.remove(
+                        "input-error"
+                    );
+                    this.previousElementSibling.previousElementSibling.classList.add(
+                        "input-correct"
+                    );
+                    this.nextElementSibling.textContent = "";
+                    phoneCorrect = true;
+                }
+                validationSuccess();
+            };
+            element.onchange = function () {
+                if (element.value.length < 19 || element.value[18] === "_") {
+                    phoneCorrect = false;
+                } else {
+                    phoneCorrect = true;
+                }
+                validationSuccess();
+            };
+            element.oninput = function () {
+                if (element.value.length < 19 || element.value[18] === "_") {
+                    phoneCorrect = false;
+                } else {
+                    phoneCorrect = true;
+                }
+                validationSuccess();
+            };
         }
     }
-}
-// '’-
-if (firstName.length) {
-    for (let i = 0; i < firstName.length; i++) {
-        let regex = /[^A-ZА-ЯЁІЇЄa-zа-яіїёє'’-]/;
-        let element = firstName[i];
-        element.oninput = function () {
-            element.value = element.value.replace(regex, "");
-            if (element.value.length < 2) {
-                firstNameCorrect = false;
-            } else {
-                firstNameCorrect = true;
-            }
-            validationSuccess();
-        };
-        element.onblur = function () {
-            if (element.value.length < 2) {
-                this.classList.remove("input-correct");
-                this.classList.add("input-error");
-                this.previousElementSibling.previousElementSibling.classList.remove(
-                    "input-correct"
-                );
-                this.previousElementSibling.previousElementSibling.classList.add(
-                    "input-error"
-                );
-                this.nextElementSibling.textContent = incorrectMsg;
-                firstNameCorrect = false;
-            } else {
-                this.classList.remove("input-error");
-                this.classList.add("input-correct");
-                this.previousElementSibling.previousElementSibling.classList.remove(
-                    "input-error"
-                );
-                this.previousElementSibling.previousElementSibling.classList.add(
-                    "input-correct"
-                );
-                this.nextElementSibling.textContent = "";
-                firstNameCorrect = true;
-            }
-            validationSuccess();
-        };
-        element.onchange = function () {
-            if (element.value.length < 2) {
-                firstNameCorrect = false;
-            } else {
-                firstNameCorrect = true;
-            }
-            validationSuccess();
-        };
-    }
-}
 
-if (lastName.length) {
-    for (let i = 0; i < lastName.length; i++) {
-        let regex = /[^A-ZА-ЯЁІЇЄa-zа-яіїёє'’-]/;
-        let element = lastName[i];
-        element.oninput = function () {
-            element.value = element.value.replace(regex, "");
-        };
-    }
-}
+    const TOKEN = "6116584937:AAGum0MhU8g-hRTi-oRcdJZGEQ1MWbUts14";
+    const CHAT_ID = "-1001877111884";
+    const form = document.getElementById('form');
+    const URI_API = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+    const success = document.getElementById('modal-success-window');
 
-if (email.length) {
-    for (let i = 0; i < email.length; i++) {
-        let regex =
-            /^([a-zA-Z0-9_-]+\.)*[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)*\.[a-zA-Z]{2,6}$/;
-        let regexcyr = /[а-яА-ЯіІїЇёЁ]/g;
-        let element = email[i];
-        element.oninput = function () {
-            this.value = this.value.replace(regexcyr, "");
-            if (this.value.match(regex)) {
-                emailCorrect = true;
-            } else {
-                emailCorrect = false;
-            }
-            validationSuccess();
-        };
-        element.onblur = function () {
-            if (this.value.match(regex)) {
-                this.classList.remove("input-error");
-                this.classList.add("input-correct");
-                this.previousElementSibling.previousElementSibling.classList.remove(
-                    "input-error"
-                );
-                this.previousElementSibling.previousElementSibling.classList.add(
-                    "input-correct"
-                );
-                this.nextElementSibling.textContent = "";
-                emailCorrect = true;
-            } else {
-                this.classList.remove("input-correct");
-                this.classList.add("input-error");
-                this.previousElementSibling.previousElementSibling.classList.remove(
-                    "input-correct"
-                );
-                this.previousElementSibling.previousElementSibling.classList.add(
-                    "input-error"
-                );
-                this.nextElementSibling.textContent = incorrectMsg;
-                emailCorrect = false;
-            }
-            validationSuccess();
-        };
-        element.onchange = function () {
-            if (this.value.match(regex)) {
-                emailCorrect = true;
-            } else {
-                emailCorrect = false;
-            }
-            validationSuccess();
-        };
-    }
-}
+    //Meaages and titles for popup-success window
+    let succMessage = document.getElementById("popup-success-text");
+    let messageUA =
+        "Вже найближчим часом ми зв’яжемось з вами для уточнення деталей.";
+    let messageEN = "We will contact you soon to clarify the details.";
+    let errMessageUA = "Сервер тимчасово перевантажений.";
+    let errMessageEN = "The server is temporarily overloaded.";
+    let messageTitle = document.getElementById("popup-success-title");
+    let messageTitleUA = "Дякуємо за ваше звернення";
+    let messageTitleEN = "Thank you for your application";
+    let errMessageTitleUA = "Сталась помилка";
+    let errMessageTitleEN = "An error occurred";
 
-// INPUTMASK +38 (___) ___-__-__
-$(".phone").inputmask({
-    mask: "+38 (999) 999-99-99",
-    greedy: false,
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        let message = `<b>Asign from site!</b>\n`;
+        message += `<b>First name: </b> ${this.firstName.value}\n`;
+        message += `<b>Last name: </b> ${this.lastName.value}\n`;
+        message += `<b>Email: </b> ${this.email.value}\n`;
+        message += `<b>Phone: </b> ${this.phone.value}\n`;
+
+        axios.post(URI_API, {
+            chat_id: CHAT_ID,
+            parse_mode: 'html',
+            text: message
+        })
+
+            .then((res) => {
+                this.firstName.value = "";
+                this.lastName.value = "";
+                this.email.value = "";
+                this.phone.value = "";
+                if (langEn) {
+                    succMessage.textContent = messageEN;
+                    succMessage.textContent =
+                        messageTitleEN;
+                } else {
+                    succMessage.textContent = messageUA;
+                    messageTitle.textContent =
+                        messageTitleUA;
+                }
+                $("#modal-success-window").modal("show");
+            })
+            .catch(() => {
+                if (langEn) {
+                    succMessage.textContent = errMessageEN;
+                    messageTitle.textContent =
+                        errMessageTitleEN;
+                } else {
+                    succMessage.textContent = errMessageUA;
+                    messageTitle.textContent =
+                        errMessageTitleUA;
+                }
+            })
+            .finally(() => {
+                console.log('End');
+            })
+    });
+
 });
-if (phone.length) {
-    for (let i = 0; i < phone.length; i++) {
-        let element = phone[i];
-        element.onblur = function () {
-            if (element.value.length < 19 || element.value[18] === "_") {
-                this.classList.remove("input-correct");
-                this.classList.add("input-error");
-                this.previousElementSibling.previousElementSibling.classList.remove(
-                    "input-correct"
-                );
-                this.previousElementSibling.previousElementSibling.classList.add(
-                    "input-error"
-                );
-                this.nextElementSibling.textContent = incorrectMsg;
-                phoneCorrect = false;
-            } else {
-                this.classList.remove("input-error");
-                this.classList.add("input-correct");
-                this.previousElementSibling.previousElementSibling.classList.remove(
-                    "input-error"
-                );
-                this.previousElementSibling.previousElementSibling.classList.add(
-                    "input-correct"
-                );
-                this.nextElementSibling.textContent = "";
-                phoneCorrect = true;
-            }
-            validationSuccess();
-        };
-        element.onchange = function () {
-            if (element.value.length < 19 || element.value[18] === "_") {
-                phoneCorrect = false;
-            } else {
-                phoneCorrect = true;
-            }
-            validationSuccess();
-        };
-        element.oninput = function () {
-            if (element.value.length < 19 || element.value[18] === "_") {
-                phoneCorrect = false;
-            } else {
-                phoneCorrect = true;
-            }
-            validationSuccess();
-        };
-    }
-}
-
-
-

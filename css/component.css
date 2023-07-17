@@ -429,7 +429,26 @@ label {
     position: relative;
     opacity: 0;
     transition: all .8s ease 0s;
-    transform: perspective(600px) translate(0, -100%) rotateX(45deg)
+    transform: perspective(600px) translate(0, -100%) rotateX(45deg);
+}
+
+/* _sending */
+
+.popup-form::after {
+    content: "";
+    position: absolute;
+    top: 30vh;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../img/loading.gif') center / 100px no-repeat;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.popup-form._sending::after {
+    opacity: 1;
+    visibility: hidden;
 }
 
 .contact-content {
@@ -527,11 +546,15 @@ label {
 
 #modal-success-window .popup-success-title {
     margin-top: 59px;
-    font-size: 40px
+    font-size: 40px;
+    text-align: center;
 }
 
 #modal-success-window .popup-success-text {
-    margin-top: 33px
+    margin-top: 33px;
+    font-size: 25px;
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 #modal-success-window .popup-btn {

@@ -874,6 +874,49 @@ input:focus {
     .list-unstyled {
         margin-bottom: 0;
     }
+
+    #modal-success-window {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, .5)
+    }
+
+    #modal-success-window .modal-dialog {
+        width: 100%;
+        height: 352px;
+    }
+
+    #modal-success-window .popup-success-content {
+        padding: 40px 20px 20px;
+        width: 100%;
+        min-height: 352px;
+    }
+
+    #modal-success-window .btn-close {
+        left: 90%;
+        top: 31px;
+        width: 20px;
+        height: 20px;
+    }
+
+    #modal-success-window .popup-success-title {
+        margin-top: 30px;
+        font-size: 40px;
+        text-align: center;
+    }
+
+    #modal-success-window .popup-success-text {
+        margin-top: 15px;
+        font-size: 16px;
+        line-height: 120%;
+    }
+
+    #modal-success-window .popup-btn {
+        margin-top: 20px;
+        width: 140px;
+        height: 42px;
+    }
 }
 
 @media (max-width: 768px) {
